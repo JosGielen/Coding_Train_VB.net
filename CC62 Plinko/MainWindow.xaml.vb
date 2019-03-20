@@ -5,7 +5,7 @@ Class MainWindow
     Public Delegate Sub WaitDelegate(ByVal t As Integer)
     Private WaitTime As Integer = 10
     Private rnd As Random = New Random()
-    Dim ball As PlinkoBall
+    Private ball As PlinkoBall
     Private balls As List(Of PlinkoBall)
     Private pins As List(Of PlinkoPin)
     Private pinDiameter As Double = 15.0
