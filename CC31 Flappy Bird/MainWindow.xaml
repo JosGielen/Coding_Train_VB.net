@@ -1,0 +1,12 @@
+﻿<Window x:Class="MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Flappy_Bird"
+        mc:Ignorable="d"
+        Title="Flappy Bird" Height="600" Width="1000" Loaded="Window_Loaded" MouseLeftButtonUp="Window_MouseLeftButtonUp" Closing="Window_Closing" KeyDown="Window_KeyDown">
+    <Grid>
+        <Canvas Name="Canvas1" Background="Yellow" ></Canvas>
+    </Grid>
+</Window>
