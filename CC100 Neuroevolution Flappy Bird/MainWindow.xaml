@@ -1,0 +1,28 @@
+﻿<Window x:Class="MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Flappy_BirdNN"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="700" Width="1000" Closing="Window_Closing" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0">
+            <MenuItem Header="File">
+                <MenuItem Header="Load Flappy" Name="MnuLoad" Click="MnuLoad_Click" ></MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="Save Best Flappy" Name="MnuSave" Click="MnuSave_Click" ></MenuItem>
+                <MenuItem Header="Save Current Flappy" Name="MnuSaveCurrent" Click="MnuSaveCurrent_Click"></MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="Exit" Name="MnuExit" Click="MnuExit_Click" ></MenuItem>
+            </MenuItem>
+        </Menu>
+        <Canvas Grid.Row="1" Name="Canvas1" Background="Yellow" ></Canvas>
+        <Button Grid.Row="2" Margin="15" Width="80" Name="BtnStart" Click="BtnStart_Click">START</Button>
+    </Grid>
+</Window>

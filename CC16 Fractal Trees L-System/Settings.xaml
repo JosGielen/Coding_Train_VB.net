@@ -1,0 +1,122 @@
+﻿<Window x:Class="Settings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:L_SystemPlants"
+        mc:Ignorable="d"
+        Title="L-System Plant Settings" Height="595" Width="365">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" >
+            <Label Margin="5">Fractal Type:</Label>
+            <TextBox Margin="5" Width="120" Name="TxtFractalType"></TextBox>
+        </StackPanel>
+        <GroupBox Grid.Row="1" Margin="5" BorderBrush="Blue" BorderThickness="1" Header="INITIAL VALUES:">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.8*"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">Initial String</Label>
+                <TextBox Grid.Row="0" Grid.Column="1" Name="TxtInitialString" Margin="5" Width="50" HorizontalAlignment="Left">A</TextBox>
+                <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right">Initial Length</Label>
+                <TextBox Grid.Row="1" Grid.Column="1" Name="TxtInitialLength" Margin="5" Width="50" HorizontalAlignment="Left">0.5</TextBox>
+                <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right">Initial Angle</Label>
+                <TextBox Grid.Row="2" Grid.Column="1" Name="TxtInitialAngle" Margin="5" Width="50" HorizontalAlignment="Left">0</TextBox>
+                <CheckBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="20,5,5,5" IsChecked="False" Name="cbShowLeaves" FlowDirection="RightToLeft" HorizontalAlignment="Left">Show Leaves</CheckBox>
+                <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right">Maximum Iterations</Label>
+                <TextBox Grid.Row="0" Grid.Column="3" Name="TxtMaxIterations" Margin="5" Width="50" HorizontalAlignment="Left">10</TextBox>
+                <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right">Start Position X</Label>
+                <TextBox Grid.Row="1" Grid.Column="3" Name="TxtStartPosX" Margin="5" Width="50" HorizontalAlignment="Left">0.5</TextBox>
+                <Label Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right">Start Position Y</Label>
+                <TextBox Grid.Row="2" Grid.Column="3" Name="TxtStartPosY" Margin="5" Width="50" HorizontalAlignment="Left">1</TextBox>
+                <Label Grid.Row="3" Grid.Column="2" HorizontalAlignment="Right">Leaves Size</Label>
+                <TextBox Grid.Row="3" Grid.Column="3" Name="TxtLeaveSize" Margin="5" Width="50" HorizontalAlignment="Left">6</TextBox>
+                <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right">Branch Color</Label>
+                <ComboBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Name="CmbBranchColor" Margin="4"></ComboBox>
+                <Label Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right">Leaves Color</Label>
+                <ComboBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Name="CmbLeavesColor" Margin="4"></ComboBox>
+
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="2" Margin="5" BorderBrush="Blue" BorderThickness="1" Header="VARIATION:">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">Length Scaling Factor</Label>
+                <TextBox Grid.Row="0" Grid.Column="1" Name="TxtLengthScale" Margin="5" Width="35" HorizontalAlignment="Left">1</TextBox>
+                <CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" IsChecked="False" Name="cbBranchVariation" FlowDirection="RightToLeft" HorizontalAlignment="Right">Branch Thickness Variation</CheckBox>
+                <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right">Deflection Angle</Label>
+                <TextBox Grid.Row="0" Grid.Column="3" Name="TxtDeflectionAngle" Margin="5" Width="35" HorizontalAlignment="Left">90</TextBox>
+                <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right">Start Branch Size</Label>
+                <TextBox Grid.Row="1" Grid.Column="3" Name="TxtBranchStartSize" Margin="5" Width="35" HorizontalAlignment="Left">12</TextBox>
+                <CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" IsChecked="False" Name="cbAllowRandom" FlowDirection="RightToLeft" HorizontalAlignment="Right">Random Variation</CheckBox>
+                <Label Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right">Random Percentage</Label>
+                <TextBox Grid.Row="2" Grid.Column="3" Name="TxtRandomPercentage" Margin="5" Width="35" HorizontalAlignment="Left">20</TextBox>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="3" Margin="5" BorderBrush="Blue" BorderThickness="1" Header="L-SYSTEM RULES:">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">A-Rule</Label>
+                <TextBox Grid.Row="0" Grid.Column="1" Name="TxtArule" Margin="5" Width="100" HorizontalAlignment="Left">A</TextBox>
+                <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right">B-Rule</Label>
+                <TextBox Grid.Row="1" Grid.Column="1" Name="TxtBrule" Margin="5" Width="100" HorizontalAlignment="Left">B</TextBox>
+                <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right">C-Rule</Label>
+                <TextBox Grid.Row="2" Grid.Column="1" Name="TxtCrule" Margin="5" Width="100" HorizontalAlignment="Left">C</TextBox>
+                <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right">X-Rule</Label>
+                <TextBox Grid.Row="0" Grid.Column="3" Name="TxtXrule" Margin="5" Width="100" HorizontalAlignment="Left">X</TextBox>
+                <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right">Y-Rule</Label>
+                <TextBox Grid.Row="1" Grid.Column="3" Name="TxtYrule" Margin="5" Width="100" HorizontalAlignment="Left">Y</TextBox>
+                <Label Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right">Z-Rule</Label>
+                <TextBox Grid.Row="2" Grid.Column="3" Name="TxtZrule" Margin="5" Width="100" HorizontalAlignment="Left">Z</TextBox>
+            </Grid>
+        </GroupBox>
+        <Grid  Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Margin="5" Width="80" Height="25" Name="BtnStart" Click="BtnStart_Click">Start</Button>
+            <!-- <Button Grid.Column="1" Margin="5" Width="90" Height="25" Name="BtnNext" Click="BtnNext_Click">Next Iteration</Button> -->
+            <Button Grid.Column="2" Margin="5" Width="80" Height="25" Name="BtnClose" Click="BtnClose_Click">Close</Button>
+        </Grid>
+    </Grid>
+</Window>
