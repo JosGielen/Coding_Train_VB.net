@@ -1,0 +1,26 @@
+﻿<Window x:Class="MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EvolvSteering"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="750" Width="800" Loaded="Window_Loaded" KeyUp="Window_KeyUp">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Margin="5" BorderBrush="blue" BorderThickness="1" CornerRadius="8">
+            <Canvas Margin="3" Name="canvas1" ClipToBounds="True"></Canvas>
+        </Border>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" >
+            <Label Margin="15,5,5,5">Eldest:</Label>
+            <TextBox Margin="5" Width="450" Name="TxtEldest"></TextBox>
+            <Label Margin="15,5,5,5">Food:</Label>
+            <TextBox Margin="5" Width="50" Name="TxtFoodCount"></TextBox>
+            <Label Margin="15,5,5,5">Poison:</Label>
+            <TextBox Margin="5" Width="50" Name="TxtPoisonCount"></TextBox>
+        </StackPanel>
+    </Grid>
+</Window>
