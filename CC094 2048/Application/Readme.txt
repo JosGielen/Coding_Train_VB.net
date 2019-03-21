@@ -1,0 +1,1 @@
+Use the arrow keys the move the pieces.

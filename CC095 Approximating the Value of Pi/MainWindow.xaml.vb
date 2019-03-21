@@ -1,4 +1,4 @@
-﻿Imports System.Windows.Threading
+Imports System.Windows.Threading
 Imports System.Threading
 
 Class MainWindow
@@ -50,7 +50,7 @@ Class MainWindow
             started = False
         End If
         Do While started
-            For I As Integer = 0 To 10000
+            For I As Integer = 0 To 1000
                 X = MyCanvas.ActualWidth * rand.NextDouble()
                 Y = MyCanvas.ActualHeight * rand.NextDouble()
                 If (X - W / 2) ^ 2 + (Y - H / 2) ^ 2 < (W / 2) ^ 2 Then
@@ -86,5 +86,9 @@ Class MainWindow
     Public Function LocationsDistance(ByVal p1 As Point, ByVal p2 As Point) As Double
         Return Math.Sqrt((p2.X - p1.X) ^ 2 + (p2.Y - p1.Y) ^ 2)
     End Function
+    
+    Private Sub Window_Closing(sender As Object, e As ComponentModel.CancelEventArgs)
+            End
+    End Sub
 
 End Class

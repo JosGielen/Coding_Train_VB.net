@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Logo"
         mc:Ignorable="d"
-        Title="MainWindow" Height="900" Width="1000" Loaded="Window_Loaded">
+        Title="MainWindow" Height="900" Width="1000" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -14,9 +14,11 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Label Grid.Row="0" Grid.Column="0" Margin="5" FontWeight="Bold" FontSize="14">INPUT:</Label>
-        <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Name="TxtInput"></TextBox>
-        <Canvas Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Name="Canvas1"></Canvas>
+        <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Name="TxtInput" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" MaxHeight="100"></TextBox>
+        <Button Grid.Row="0" Grid.Column="2" Margin="5" Width="80" Height="28" VerticalAlignment="Center" Name="BtnStart" Click="BtnStart_Click">START</Button>
+        <Canvas Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Name="Canvas1"></Canvas>
     </Grid>
 </Window>

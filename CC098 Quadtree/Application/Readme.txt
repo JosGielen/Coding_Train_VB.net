@@ -1,0 +1,1 @@
+Drag the mouse over the window to select an area.

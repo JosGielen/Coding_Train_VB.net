@@ -1,0 +1,1 @@
+Click in the window to start the simulation.
