@@ -1,0 +1,45 @@
+﻿<Window x:Class="Settings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_7SegmentDisplay"
+        mc:Ignorable="d"
+        Title="Settings" Height="350" Width="230" Loaded="Window_Loaded" Closing="Window_Closing" WindowStyle="ToolWindow" ResizeMode="NoResize" ShowInTaskbar="False">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Margin="5" >Border:</Label>
+        <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Name="TxtBorder" HorizontalContentAlignment="Center"></TextBox>
+        <Label Grid.Row="1" Grid.Column="0" Margin="5" >Segment Thickness:</Label>
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Name="TxtThickness" HorizontalContentAlignment="Center"></TextBox>
+        <Label Grid.Row="2" Grid.Column="0" Margin="5" >Segment Campher:</Label>
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Name="TxtCampher" HorizontalContentAlignment="Center"></TextBox>
+        <Label Grid.Row="3" Grid.Column="0" Margin="5" >Segment Spacing:</Label>
+        <TextBox Grid.Row="3" Grid.Column="1" Margin="5" Name="TxtSpace" HorizontalContentAlignment="Center"></TextBox>
+        <CheckBox  Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="15,5,5,5" Name="CbHasCampher">Segments Have Campher</CheckBox>
+        <CheckBox  Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="15,5,5,5" Name="CbIsTilted">Display is Tilted</CheckBox>
+        <Label Grid.Row="6" Grid.Column="0" Margin="5" >Segment Color:</Label>
+        <ComboBox Grid.Row="6" Grid.Column="1" Margin="5" Name="CmbSegmentColor"></ComboBox>
+        <Label Grid.Row="7" Grid.Column="0" Margin="5" >Background Color:</Label>
+        <ComboBox Grid.Row="7" Grid.Column="1" Margin="5" Name="CmbBackgroundColor"></ComboBox>
+        <StackPanel Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="0,10,0,0" >
+            <Button Width="60" Height="28" Margin="35,5,10,5" Name="BtnApply" Click="BtnApply_Click">APPLY</Button>
+            <Button Width="60" Height="28" Margin="35,5,5,5" Name="BtnDefault" Click="BtnDefault_Click">DEFAULT</Button>
+        </StackPanel>
+    </Grid>
+</Window>
