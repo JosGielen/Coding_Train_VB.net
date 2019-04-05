@@ -59,7 +59,7 @@ Class MainWindow
                     lines(I).Stroke = myColors(CInt(values(I)))
                     lines(I + 1).Y2 = canvas1.ActualHeight - values(I + 1)
                     lines(I + 1).Stroke = myColors(CInt(values(I + 1)))
-                    Me.Dispatcher.Invoke(DispatcherPriority.ApplicationIdle, New WaitDelegate(AddressOf Wait), WaitTime)
+                    Me.Dispatcher.Invoke(DispatcherPriority.SystemIdle, New WaitDelegate(AddressOf Wait), WaitTime)
                 End If
             Next
             last -= 1
