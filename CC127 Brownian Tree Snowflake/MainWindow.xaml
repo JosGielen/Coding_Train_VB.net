@@ -1,0 +1,25 @@
+﻿<Window x:Class="MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Snowflake"
+        mc:Ignorable="d"
+        Title="Snowflake" Height="700" Width="650" Loaded="Window_Loaded"  Closing="Window_Closing" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Canvas Grid.Row="0" Name="canvas1" Background="Black"></Canvas>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" >
+            <Label Margin="10" Padding="5,5,0,5">Max Y Deviation:</Label>
+            <Slider Margin="0,13,0,10" Width="100" Minimum="1" Maximum="10" Value="2" Name="sldDeviation" ValueChanged="SldDeviation_ValueChanged" TickPlacement="BottomRight" SmallChange="1" TickFrequency="1" IsSnapToTickEnabled="True" ></Slider>
+            <TextBox Margin="0,10,10,10" Width="25" Name="TxtDeviation" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">2</TextBox>
+            <Label Margin="10" Padding="5,5,0,5">Particle Size:</Label>
+            <Slider Margin="0,13,0,10" Width="100" Minimum="2" Maximum="8" Value="3" Name="sldSize" ValueChanged="SldSize_ValueChanged"  TickPlacement="BottomRight" SmallChange="0.1" TickFrequency="0.5" IsSnapToTickEnabled="True" ></Slider>
+            <TextBox Margin="0,10,10,10" Width="25" Name="TxtSize" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">3</TextBox>
+            <Button  Margin="30,10,10,10" Width="60" Name="BtnStart" Click="BtnStart_Click">START</Button>
+        </StackPanel>
+    </Grid>
+</Window>
