@@ -1,0 +1,27 @@
+﻿<Window x:Class="MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DiffReaction"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="550" Width="500" Closed="Window_Closed" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged" LocationChanged="Window_LocationChanged">
+    <Grid ClipToBounds="True">
+        <Menu Height="22" Name="Menu1" VerticalAlignment="Top">
+            <MenuItem Header="File" Width="50" Name="MenuFile">
+                <MenuItem Header="New" Name="MenuNew" />
+                <MenuItem Header="Open" Name="MenuOpen" />
+                <MenuItem Header="SaveAs" Name="MenuSaveAs" />
+                <Separator/>
+                <MenuItem Header="Exit" Name="MenuExit" />
+            </MenuItem>
+            <MenuItem Header="Size" Width="50" Name="MenuSize" >
+                <MenuItem Header="200x200" Name="Menu200" IsCheckable="True" IsChecked="True"  />
+                <MenuItem Header="300x300" Name="Menu300" IsCheckable="True" />
+                <MenuItem Header="400x400" Name="Menu400" IsCheckable="True" />
+                <MenuItem Header="500x500" Name="Menu500" IsCheckable="True" />
+            </MenuItem>
+        </Menu>
+        <Image Margin="0,23,0,0" Name="Image1" Stretch="None" />
+    </Grid>
+</Window>
