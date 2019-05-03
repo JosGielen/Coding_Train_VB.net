@@ -1,0 +1,13 @@
+﻿<Window x:Class="MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:gl="clr-namespace:SharpGL.WPF;assembly=SharpGL.WPF"
+        xmlns:local="clr-namespace:NoiseGifLoop3D"
+        mc:Ignorable="d"
+        Title="4D Simplex Noise Gif Loop : CLICK TO START" Height="350" Width="380" Loaded="Window_Loaded" MouseLeftButtonUp="Window_MouseLeftButtonUp" Closing="Window_Closing">
+    <Grid>
+        <local:GLScene x:Name="myScene"></local:GLScene>
+    </Grid>
+</Window>
