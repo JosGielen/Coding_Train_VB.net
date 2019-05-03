@@ -2,6 +2,7 @@
 Coding Train challenges implemented in Visual Bacic.net. All programs were made as Windows Desktop WPF Applications
 
 All programs were made in Visual Studio 2017 (Community Edition) with .NET version 4.6.1
+
 .NET runtime 4.6.1 or higher is needed to run the applications.
 
 To use the code in Visual Studio : 
