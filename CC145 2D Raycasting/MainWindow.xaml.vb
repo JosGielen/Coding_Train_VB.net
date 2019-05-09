@@ -19,9 +19,6 @@
     Private CurrentCell As Cell
     Private NextCell As Cell
     Private CellStack As List(Of Cell)
-    'DEBUG CODE FIELDS FOR FPS
-    Private LastRenderTime As Date
-    Private Framecounter As Integer
 
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
         RayCount = CInt(canvas2.ActualWidth)
@@ -91,17 +88,6 @@
     End Sub
 
     Private Sub CompositionTarget_Rendering(sender As Object, e As EventArgs)
-
-        'DEBUG CODE: Show FPS
-        Framecounter += 1
-        If Framecounter = 10 Then
-            Dim fps As Double = CInt(10000 / (Now - LastRenderTime).TotalMilliseconds)
-            Me.Title = "FPS = " & fps.ToString
-            LastRenderTime = Now()
-            Framecounter = 0
-        End If
-        'END DEBUG CODE
-
         Dim w As Wall
         Dim WallColor As Brush = Brushes.White
         'Generate the maze
