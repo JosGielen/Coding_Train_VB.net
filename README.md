@@ -9,5 +9,5 @@ To use the code in Visual Studio :
 - Create a new default Visual Basic Windows Desktop WPF Application with an appropriate name. (This should generate the Mainwindow files)
 - Copy all the files to this new project.
 - Add reference to all the DLL files. (3D programs also need System.Drawing.dll)
-- Copy all the .VB files to the project directory (Overwrite Mainwindow.xaml and Mainwindow..xaml.vb)
+- Copy all the .VB and .XAML files to the project directory (Overwrite Mainwindow.xaml and Mainwindow..xaml.vb)
 - Add all those .VB files to the project
