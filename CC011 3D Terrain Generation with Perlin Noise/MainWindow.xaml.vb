@@ -12,6 +12,7 @@ Class MainWindow
     Private PeakHeight As Double = 8.0
     Private Roughness As Integer = 4
     Private Elevations(XSize - 1, ZSize - 1) As Double
+    Private UseOpenSimplex As Boolean = True
     Private ZOff As Double = 0.0
 
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
@@ -43,23 +44,31 @@ Class MainWindow
     End Sub
 
     Private Sub Init()
+        UseOpenSimplex = RbSimplex.IsChecked.Value
         Dim h As Double = 0.0
         For I As Integer = 0 To XSize - 1
             For J As Integer = 0 To ZSize - 2
-                h = PeakHeight * PerlinNoise.WideNoise2D(I * Scale * CellSize, J * Scale * CellSize + ZOff, Roughness, 0.5, 1) - 0.3
+                If UseOpenSimplex Then
+                    h = PeakHeight * OpenSimplexNoise.WideSimplex2D(I * Scale * CellSize, J * Scale * CellSize + ZOff, Roughness, 0.5, 1) - 0.3
+                Else
+                    h = PeakHeight * PerlinNoise.WideNoise2D(I * Scale * CellSize, J * Scale * CellSize + ZOff, Roughness, 0.5, 1) - 0.3
+                End If
                 If h < 0 Then h = 0.05
                 Elevations(I, J) = h
             Next
             Elevations(I, ZSize - 1) = 0.8 * PeakHeight
         Next
-
     End Sub
 
     Private Sub CompositionTarget_Rendering(sender As Object, e As EventArgs)
         If Not Rendering Then Exit Sub
         Dim h As Double = 0.0
         For I As Integer = 0 To XSize - 1
-            h = PeakHeight * PerlinNoise.WideNoise2D(I * Scale * CellSize, ZOff, Roughness, 0.5, 1) - 0.3
+            If UseOpenSimplex Then
+                h = PeakHeight * OpenSimplexNoise.WideSimplex2D(I * Scale * CellSize, ZOff, Roughness, 0.5, 1) - 0.3
+            Else
+                h = PeakHeight * PerlinNoise.WideNoise2D(I * Scale * CellSize, ZOff, Roughness, 0.5, 1) - 0.3
+            End If
             If h < 0 Then h = 0.05
             Elevations(I, 0) = h
             For J As Integer = ZSize - 1 To 1 Step -1
@@ -68,6 +77,7 @@ Class MainWindow
         Next
         ZOff -= Scale * CellSize
         Mesh.Heights = Elevations
+        GC.Collect()
         Mesh.GenerateGeometry(Scene1)
         'Render the scene.
         Scene1.Render()
@@ -98,7 +108,4 @@ Class MainWindow
         End If
     End Sub
 
-    Private Sub SldScale_ValueChanged(sender As Object, e As RoutedPropertyChangedEventArgs(Of Double))
-
-    End Sub
 End Class

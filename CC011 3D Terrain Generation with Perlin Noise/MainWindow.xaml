@@ -19,6 +19,12 @@
             <Label Margin="50,10,0,10" FontSize="14" Padding="0">Roughness:</Label>
             <Slider Margin="3,10,10,10" Width="120" Minimum="1" Maximum="6" LargeChange="1" SmallChange="1" TickFrequency="1" TickPlacement="BottomRight" Value="4" IsSnapToTickEnabled="True" Name="SldRoughness"></Slider>
             <Button Margin="50,10,10,10" Width="80" FontSize="14" FontWeight="Bold" Name="BtnStart" Click="BtnStart_Click">START</Button>
+            <Border Margin="5" BorderBrush="Blue" BorderThickness="1.0">
+                <StackPanel>
+                    <RadioButton Name="RbPerlin" GroupName="noise" IsChecked="True">Perlin Noise</RadioButton>
+                    <RadioButton Name="RbSimplex" GroupName="noise">Simplex Noise</RadioButton>
+                </StackPanel>
+            </Border>
         </StackPanel>
     </Grid>
 </Window>

@@ -54,6 +54,130 @@
   resource lookups using this strongly typed resource class.
 </summary>
 </member>
+<member name="M:_3DPerlinTerrain.OpenSimplexNoise.WideSimplex2D(System.Double,System.Double,System.Int32)">
+ <summary>
+ Calculates a widened single octave 2D OpenSimplex Noise value between 0 and 1 for input values x,y.
+ </summary>
+ <param name="x">The x input of the 2D OpenSimplex Noise function.</param>
+ <param name="y">The y input of the 2D OpenSimplex Noise function.</param>
+ <param name="factor">The number of times the widening function is applied</param>
+</member>
+<member name="M:_3DPerlinTerrain.OpenSimplexNoise.Simplex2D(System.Double,System.Double)">
+ <summary>
+ Calculates a single octave 2D OpenSimplex Noise value between 0 and 1 for input values x,y.
+ </summary>
+ <param name="x">The x input of the 2D OpenSimplex Noise function.</param>
+ <param name="y">The y input of the 2D OpenSimplex Noise function.</param>
+</member>
+<member name="M:_3DPerlinTerrain.OpenSimplexNoise.WideSimplex2D(System.Double,System.Double,System.Int32,System.Double,System.Int32)">
+ <summary>
+ Calculates a widened 2D OpenSimplex Noise value between 0 and 1 for input values x,y with given octaves and persistence.
+ </summary>
+ <param name="x">The x input of the 2D OpenSimplex Noise function.</param>
+ <param name="y">The y input of the 2D OpenSimplex Noise function.</param>
+ <param name="octaves">Number of octaves used to calculate the 2D OpenSimplex Noise.</param>
+ <param name="persistence">Relative strength of higher octaves in the 2D OpenSimplex Noise function.</param>
+ <param name="factor">The number of times the widening function is applied</param>
+</member>
+<member name="M:_3DPerlinTerrain.OpenSimplexNoise.Simplex2D(System.Double,System.Double,System.Int32,System.Double)">
+ <summary>
+ Calculates a 2D OpenSimplex Noise value between 0 and 1 for input values x,y with given octaves and persistence.
+ </summary>
+ <param name="x">The x input of the 2D OpenSimplex Noise function.</param>
+ <param name="y">The y input of the 2D OpenSimplex Noise function.</param>
+ <param name="octaves">Number of octaves used to calculate the 2D OpenSimplex Noise.</param>
+ <param name="persistence">Relative strength of higher octaves in the 2D OpenSimplex Noise function.</param>
+</member>
+<member name="M:_3DPerlinTerrain.OpenSimplexNoise.WideSimplex3D(System.Double,System.Double,System.Double,System.Int32)">
+ <summary>
+ Calculates a widened single octave 3D OpenSimplex Noise value between 0 and 1 for input values x,y,z.
+ </summary>
+ <param name="x">The x input of the 3D OpenSimplex Noise function.</param>
+ <param name="y">The y input of the 3D OpenSimplex Noise function.</param>
+ <param name="z">The z input of the 3D OpenSimplex Noise function.</param>
+ <param name="factor">The number of times the widening function is applied</param>
+</member>
+<member name="M:_3DPerlinTerrain.OpenSimplexNoise.Simplex3D(System.Double,System.Double,System.Double)">
+ <summary>
+ Calculates a single octave 3D OpenSimplex Noise value between 0 and 1 for input values x,y,z.
+ </summary>
+ <param name="x">The x input of the 3D OpenSimplex Noise function.</param>
+ <param name="y">The y input of the 3D OpenSimplex Noise function.</param>
+ <param name="z">The z input of the 3D OpenSimplex Noise function.</param>
+</member>
+<member name="M:_3DPerlinTerrain.OpenSimplexNoise.WideSimplex3D(System.Double,System.Double,System.Double,System.Int32,System.Double,System.Int32)">
+ <summary>
+ Calculates a widened 3D OpenSimplex Noise value between 0 and 1 for input values x,y,z with given octaves and persistence.
+ </summary>
+ <param name="x">The x input of the 3D OpenSimplex Noise function.</param>
+ <param name="y">The y input of the 3D OpenSimplex Noise function.</param>
+ <param name="z">The z input of the 3D OpenSimplex Noise function.</param>
+ <param name="octaves">Number of octaves used to calculate the 3D Perlin Noise.</param>
+ <param name="persistence">Relative strength of higher octaves in the 3D Perlin Noise function.</param>
+ <param name="factor">The number of times the widening function is applied</param>
+</member>
+<member name="M:_3DPerlinTerrain.OpenSimplexNoise.Simplex3D(System.Double,System.Double,System.Double,System.Int32,System.Double)">
+ <summary>
+ Calculates a 3D OpenSimplex Noise value between 0 and 1 for input values x,y,z with given octaves and persistence.
+ </summary>
+ <param name="x">The x input of the 3D OpenSimplex Noise function.</param>
+ <param name="y">The y input of the 3D OpenSimplex Noise function.</param>
+ <param name="z">The z input of the 3D OpenSimplex Noise function.</param>
+ <param name="octaves">Number of octaves used to calculate the 3D OpenSimplex Noise.</param>
+ <param name="persistence">Relative strength of higher octaves in the 3D OpenSimplex Noise function.</param>
+</member>
+<member name="M:_3DPerlinTerrain.OpenSimplexNoise.WideSimplex4D(System.Double,System.Double,System.Double,System.Double,System.Int32)">
+ <summary>
+ Calculates a single octave widened 4D OpenSimplex Noise value between 0 and 1 for input values x,y,z,w.
+ </summary>
+ <param name="x">The x input of the 4D OpenSimplex Noise function.</param>
+ <param name="y">The y input of the 4D OpenSimplex Noise function.</param>
+ <param name="z">The z input of the 4D OpenSimplex Noise function.</param>
+ <param name="w">The w input of the 4D OpenSimplex Noise function.</param>
+ <param name="factor">The number of times the widening function is applied</param>
+</member>
+<member name="M:_3DPerlinTerrain.OpenSimplexNoise.Simplex4D(System.Double,System.Double,System.Double,System.Double)">
+ <summary>
+ Calculates a single octave 4D OpenSimplex Noise value between 0 and 1 for input values x,y,z,w.
+ </summary>
+ <param name="x">The x input of the 4D OpenSimplex Noise function.</param>
+ <param name="y">The y input of the 4D OpenSimplex Noise function.</param>
+ <param name="z">The z input of the 4D OpenSimplex Noise function.</param>
+ <param name="w">The w input of the 4D OpenSimplex Noise function.</param>
+</member>
+<member name="M:_3DPerlinTerrain.OpenSimplexNoise.WideSimplex4D(System.Double,System.Double,System.Double,System.Double,System.Int32,System.Double,System.Int32)">
+ <summary>
+ Calculates a widened 4D OpenSimplex Noise value between 0 and 1 for input values x,y,z,w with given octaves and persistence.
+ </summary>
+ <param name="x">The x input of the 4D OpenSimplex Noise function.</param>
+ <param name="y">The y input of the 4D OpenSimplex Noise function.</param>
+ <param name="z">The z input of the 4D OpenSimplex Noise function.</param>
+ <param name="w">The w input of the 4D OpenSimplex Noise function.</param>
+ <param name="octaves">Number of octaves used to calculate the 4D OpenSimplex Noise.</param>
+ <param name="persistence">Relative strength of higher octaves in the 4D OpenSimplex Noise function.</param>
+ <param name="factor">The number of times the widening function is applied</param>
+</member>
+<member name="M:_3DPerlinTerrain.OpenSimplexNoise.Simplex4D(System.Double,System.Double,System.Double,System.Double,System.Int32,System.Double)">
+ <summary>
+ Calculates a 4D OpenSimplex Noise value between 0 and 1 for input values x,y,z,w with given octaves and persistence.
+ </summary>
+ <param name="x">The x input of the 4D OpenSimplex Noise function.</param>
+ <param name="y">The y input of the 4D OpenSimplex Noise function.</param>
+ <param name="z">The z input of the 4D OpenSimplex Noise function.</param>
+ <param name="w">The w input of the 4D OpenSimplex Noise function.</param>
+ <param name="octaves">Number of octaves used to calculate the 4D OpenSimplex Noise.</param>
+ <param name="persistence">Relative strength of higher octaves in the 4D OpenSimplex Noise function.</param>
+</member>
+<member name="M:_3DPerlinTerrain.OpenSimplexNoise.SmoothStep(System.Double,System.Double,System.Double,System.Int32)">
+ <summary>
+ Stretches a value toward the ends of an interval (uses the Fade function defined by K. Perlin).
+ </summary>
+ <param name="x">value that will be stretched</param>
+ <param name="lower">Lower end of the interval</param>
+ <param name="upper">Upper end of the interval</param>
+ <param name="Strength">Number of times the Fade function is applied.</param>
+ <returns></returns>
+</member>
 <member name="M:_3DPerlinTerrain.PerlinNoise.WideNoise(System.Double,System.Int32)">
  <summary>
  Calculates a single octave widened 1D Perlin Noise value between 0 and 1 for input value x.
