@@ -1,0 +1,24 @@
+﻿<Window x:Class="MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_3DPerlinTerrain"
+        xmlns:GL="clr-namespace:My_GL;assembly=My_GL"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="650" Width="800" Loaded="Window_Loaded" Closing="Window_Closing">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <GL:GLScene Grid.Row="0" Name="Scene1" ></GL:GLScene>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Label Margin="10,10,0,10" FontSize="14" Padding="0">Scale:</Label>
+            <Slider Margin="3,10,10,10" Width="120" Maximum="0.5" LargeChange="0.1" SmallChange="0.02" TickFrequency="0.05" TickPlacement="BottomRight" Value="0.2" Name="SldScale"></Slider>
+            <Label Margin="50,10,0,10" FontSize="14" Padding="0">Roughness:</Label>
+            <Slider Margin="3,10,10,10" Width="120" Minimum="1" Maximum="6" LargeChange="1" SmallChange="1" TickFrequency="1" TickPlacement="BottomRight" Value="4" IsSnapToTickEnabled="True" Name="SldRoughness"></Slider>
+            <Button Margin="50,10,10,10" Width="80" FontSize="14" FontWeight="Bold" Name="BtnStart" Click="BtnStart_Click">START</Button>
+        </StackPanel>
+    </Grid>
+</Window>
