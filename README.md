@@ -7,7 +7,6 @@ All programs were made in Visual Studio 2017 (Community Edition) with .NET versi
 
 To use the code in Visual Studio : 
 - Create a new default Visual Basic Windows Desktop WPF Application with an appropriate name. (This should generate the Mainwindow files)
-- Copy all the files to this new project.
+- Copy all the files to this new project (Overwrite Mainwindow.xaml and Mainwindow.xaml.vb).
 - Add reference to all the DLL files. (3D programs also need System.Drawing.dll)
-- Copy all the .VB and .XAML files to the project directory (Overwrite Mainwindow.xaml and Mainwindow..xaml.vb)
-- Add all those .VB files to the project
+- Add all the .xaml and all the .VB files (other than Mainwindow) to the project. (Right click the project name , slect Add..Existing Item...)
