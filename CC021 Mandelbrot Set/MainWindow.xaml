@@ -1,0 +1,91 @@
+﻿<Window x:Class="MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:lib="clr-namespace:RubberBand;assembly=RubberBand"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MandelBrot"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="690" Width="805" Loaded="Window_Loaded" Closing="Window_Closing" SizeChanged="Window_SizeChanged"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown" MouseMove="Window_MouseMove" MouseLeftButtonUp="Window_MouseLeftButtonUp" MouseRightButtonUp="Window_MouseRightButtonUp">
+    <Grid>
+        <Grid Background="Beige">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25" ></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Menu Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Center" >
+                <MenuItem Header="File" Width="50">
+                    <MenuItem Header="Open Fractal..." Name="MnuOpenFractal" Click="MnuOpenFractal_Click"></MenuItem>
+                    <MenuItem Header="Save Fractal As..." Name="MnuSavefractal" Click="MnuSavefractal_Click"></MenuItem>
+                    <Separator></Separator>
+                    <MenuItem Header="Exit" Name="MnuExit" Click="MnuExit_Click"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="Edit">
+                    <MenuItem Header="Reset Zoom" Name="MnuReset" Click="MnuReset_Click"></MenuItem>
+                    <MenuItem Header="Open Palette..." Name="MnuOpenPalette" Click="MnuOpenPalette_Click"></MenuItem>
+                </MenuItem>
+            </Menu>
+            <Grid Grid.Row="1" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition ></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition ></ColumnDefinition>
+                    <ColumnDefinition ></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Content="Bailout :" Margin="5"></Label>
+                <Grid Grid.Row="0" Grid.Column="1" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="13" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="13" />
+                        <RowDefinition Height="13" />
+                    </Grid.RowDefinitions>
+                    <TextBox Name="TxtBailout"  Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" TextAlignment="Center"></TextBox>
+                    <RepeatButton Name="BtnBailoutUP"  Grid.Column="1" Grid.Row="0" FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="BtnBailoutUP_Click">5</RepeatButton>
+                    <RepeatButton Name="BtnBailoutDown"  Grid.Column="1" Grid.Row="1" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="13" VerticalAlignment="Bottom" Click="BtnBailoutDown_Click">6</RepeatButton>
+                </Grid>
+                <Label Grid.Row="1" Grid.Column="0" Content="Max Iter :" Margin="5"></Label>
+                <Grid Grid.Row="1" Grid.Column="1" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="13" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="13" />
+                        <RowDefinition Height="13" />
+                    </Grid.RowDefinitions>
+                    <TextBox Name="TxtMaxIter"  Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" TextAlignment="Center"></TextBox>
+                    <RepeatButton Name="BtnMaxIterUP"  Grid.Column="1" Grid.Row="0" FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="BtnMaxIterUP_Click">5</RepeatButton>
+                    <RepeatButton Name="BtnMaxIterDown"  Grid.Column="1" Grid.Row="1" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="13" VerticalAlignment="Bottom" Click="BtnMaxIterDown_Click">6</RepeatButton>
+                </Grid>                
+                <StackPanel Grid.Row="6" Grid.ColumnSpan="2">
+                    <CheckBox Content="Smooth Colors" Margin="5,10,5,15" IsChecked="True" Name="CBSmooth"></CheckBox>
+                    <Label Name="LblColorMag" Content="Color Magnifier :" Margin="5,5,5,0"></Label>
+                    <Slider Margin="5,0,5,5" TickPlacement="BottomRight" Name="SldColorMag" Maximum="50" Minimum="-50" LargeChange="1" SmallChange="1" Value="0" TickFrequency="10" ValueChanged="SldColorMag_ValueChanged"></Slider>
+                    <Label Name="LblColorScroll" Content="Color Scroll :" Margin="5,5,5,0"></Label>
+                    <Slider Margin="5,0,5,15" TickPlacement="BottomRight" Name="SldColorScroll" ValueChanged="SldColorScroll_ValueChanged"></Slider>
+                    <Button Content="CALCULATE" Name="BtnCalc" Background="lightGreen" Margin="5,15,5,15" Height="30" Click="BtnCalc_Click"></Button>
+                </StackPanel>
+            </Grid>
+            <Canvas Grid.Row="1" Grid.Column="1" Margin="5" Name="Canvas1" Background="Black">
+                <lib:RubberBand Name="RBand"></lib:RubberBand>
+            </Canvas>
+            <ProgressBar Grid.Row="2" Grid.ColumnSpan="2" Height="20" Margin="5" Name="PBStatus"></ProgressBar>
+        </Grid>
+    </Grid>
+</Window>
