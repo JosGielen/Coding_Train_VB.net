@@ -1,0 +1,128 @@
+﻿<Window x:Class="Settings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Settings" Height="225" Width="250" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Row="0" Margin="5,5,5,10" BorderBrush="Blue" BorderThickness="1" Header="Parameter Values:">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Margin="5">A =</Label>
+                <Grid Grid.Row="0" Grid.Column="1" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="13" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="13" />
+                        <RowDefinition Height="13" />
+                    </Grid.RowDefinitions>
+                    <TextBox Name="TxtA" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" TextAlignment="Center"></TextBox>
+                    <RepeatButton Name="BtnAUP"  Grid.Column="1" Grid.Row="0" FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="BtnAUP_Click">5</RepeatButton>
+                    <RepeatButton Name="BtnADown"  Grid.Column="1" Grid.Row="1" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="13" VerticalAlignment="Bottom" Click="BtnADown_Click">6</RepeatButton>
+                </Grid>
+
+
+                <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Margin="5">B =</Label>
+                <Grid Grid.Row="1" Grid.Column="1" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="13" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="13" />
+                        <RowDefinition Height="13" />
+                    </Grid.RowDefinitions>
+                    <TextBox Name="TxtB" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" TextAlignment="Center"></TextBox>
+                    <RepeatButton Name="BtnBUP"  Grid.Column="1" Grid.Row="0" FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="BtnBUP_Click">5</RepeatButton>
+                    <RepeatButton Name="BtnBDown"  Grid.Column="1" Grid.Row="1" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="13" VerticalAlignment="Bottom" Click="BtnBDown_Click">6</RepeatButton>
+                </Grid>                
+                <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Margin="5">M =</Label>
+                <Grid Grid.Row="2" Grid.Column="1" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="13" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="13" />
+                        <RowDefinition Height="13" />
+                    </Grid.RowDefinitions>
+                    <TextBox Name="TxtM" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" TextAlignment="Center"></TextBox>
+                    <RepeatButton Name="BtnMUP"  Grid.Column="1" Grid.Row="0" FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="BtnMUP_Click">5</RepeatButton>
+                    <RepeatButton Name="BtnMDown"  Grid.Column="1" Grid.Row="1" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="13" VerticalAlignment="Bottom" Click="BtnMDown_Click">6</RepeatButton>
+                </Grid>
+                <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" Margin="5">N1 =</Label>
+                <Grid Grid.Row="0" Grid.Column="3" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="13" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="13" />
+                        <RowDefinition Height="13" />
+                    </Grid.RowDefinitions>
+                    <TextBox Name="TxtN1" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" TextAlignment="Center"></TextBox>
+                    <RepeatButton Name="BtnN1UP"  Grid.Column="1" Grid.Row="0" FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="BtnN1UP_Click">5</RepeatButton>
+                    <RepeatButton Name="BtnN1Down"  Grid.Column="1" Grid.Row="1" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="13" VerticalAlignment="Bottom" Click="BtnN1Down_Click">6</RepeatButton>
+                </Grid>
+                <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" Margin="5">N2 =</Label>
+                <Grid Grid.Row="1" Grid.Column="3" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="13" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="13" />
+                        <RowDefinition Height="13" />
+                    </Grid.RowDefinitions>
+                    <TextBox Name="TxtN2" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" TextAlignment="Center"></TextBox>
+                    <RepeatButton Name="BtnN2UP"  Grid.Column="1" Grid.Row="0" FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="BtnN2UP_Click">5</RepeatButton>
+                    <RepeatButton Name="BtnN2Down"  Grid.Column="1" Grid.Row="1" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="13" VerticalAlignment="Bottom" Click="BtnN2Down_Click">6</RepeatButton>
+                </Grid>                
+                <Label Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Margin="5">N3 =</Label>
+                <Grid Grid.Row="2" Grid.Column="3" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="13" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="13" />
+                        <RowDefinition Height="13" />
+                    </Grid.RowDefinitions>
+                    <TextBox Name="TxtN3" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" TextAlignment="Center"></TextBox>
+                    <RepeatButton Name="BtnN3UP"  Grid.Column="1" Grid.Row="0" FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="BtnN3UP_Click">5</RepeatButton>
+                    <RepeatButton Name="BtnN3Down"  Grid.Column="1" Grid.Row="1" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="13" VerticalAlignment="Bottom" Click="BtnN3Down_Click">6</RepeatButton>
+                </Grid>
+            </Grid>
+        </GroupBox>
+        <Grid  Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Margin="10" Width="80" Height="25" Name="BtnStart" Click="BtnStart_Click">DRAW</Button>
+            <Button Grid.Column="2" Margin="10" Width="80" Height="25" Name="BtnClose" Click="BtnClose_Click">EXIT</Button>
+        </Grid>        
+    </Grid>
+</Window>
