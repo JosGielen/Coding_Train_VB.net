@@ -1,0 +1,150 @@
+﻿<Window x:Class="Settings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Settings" Height="500" Width="260" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Label Margin="10" FontSize="14" FontWeight="Bold" >Favorites:</Label>
+            <ComboBox Width="140" Margin="10" Name="CmbFavorites" SelectionChanged="CmbFavorites_SelectionChanged"></ComboBox>
+        </StackPanel>
+        <GroupBox Grid.Row="1" Margin="5,5,5,10" BorderBrush="Blue" BorderThickness="1" Header="Parameter Values:">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Margin="5">Cell Size:</Label>
+                <Grid Grid.Row="0" Grid.Column="1" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="13" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="13" />
+                        <RowDefinition Height="13" />
+                    </Grid.RowDefinitions>
+                    <TextBox Name="TxtCellSize" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" TextAlignment="Center"></TextBox>
+                    <RepeatButton Name="BtnCellSizeUP"  Grid.Column="1" Grid.Row="0" FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="BtnCellSizeUP_Click">5</RepeatButton>
+                    <RepeatButton Name="BtnCellSizeDown"  Grid.Column="1" Grid.Row="1" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="13" VerticalAlignment="Bottom" Click="BtnCellSizeDown_Click">6</RepeatButton>
+                </Grid>
+                <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Margin="5">Number of Particle:</Label>
+                <Grid Grid.Row="1" Grid.Column="1" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="13" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="13" />
+                        <RowDefinition Height="13" />
+                    </Grid.RowDefinitions>
+                    <TextBox Name="TxtCount" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" TextAlignment="Center"></TextBox>
+                    <RepeatButton Name="BtnCountUP"  Grid.Column="1" Grid.Row="0" FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="BtnCountUP_Click">5</RepeatButton>
+                    <RepeatButton Name="BtnCountDown"  Grid.Column="1" Grid.Row="1" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="13" VerticalAlignment="Bottom" Click="BtnCountDown_Click">6</RepeatButton>
+                </Grid>                
+                <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Margin="5">Maximum Force:</Label>
+                <Grid Grid.Row="2" Grid.Column="1" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="13" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="13" />
+                        <RowDefinition Height="13" />
+                    </Grid.RowDefinitions>
+                    <TextBox Name="TxtForce" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" TextAlignment="Center"></TextBox>
+                    <RepeatButton Name="BtnForceUP"  Grid.Column="1" Grid.Row="0" FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="BtnForceUP_Click">5</RepeatButton>
+                    <RepeatButton Name="BtnForceDown"  Grid.Column="1" Grid.Row="1" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="13" VerticalAlignment="Bottom" Click="BtnForceDown_Click">6</RepeatButton>
+                </Grid>
+                <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" Margin="5">Particle Speed:</Label>
+                <Grid Grid.Row="3" Grid.Column="1" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="13" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="13" />
+                        <RowDefinition Height="13" />
+                    </Grid.RowDefinitions>
+                    <TextBox Name="TxtSpeed" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" TextAlignment="Center"></TextBox>
+                    <RepeatButton Name="BtnSpeedUP"  Grid.Column="1" Grid.Row="0" FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="BtnSpeedUP_Click">5</RepeatButton>
+                    <RepeatButton Name="BtnSpeedDown"  Grid.Column="1" Grid.Row="1" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="13" VerticalAlignment="Bottom" Click="BtnSpeedDown_Click">6</RepeatButton>
+                </Grid>
+                <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" Margin="5">Perlin Noise (XY) Change:</Label>
+                <Grid Grid.Row="4" Grid.Column="1" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="13" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="13" />
+                        <RowDefinition Height="13" />
+                    </Grid.RowDefinitions>
+                    <TextBox Name="TxtXYChange" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" TextAlignment="Center"></TextBox>
+                    <RepeatButton Name="BtnXYChangeUP"  Grid.Column="1" Grid.Row="0" FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="BtnXYChangeUP_Click">5</RepeatButton>
+                    <RepeatButton Name="BtnXYChangeDown"  Grid.Column="1" Grid.Row="1" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="13" VerticalAlignment="Bottom" Click="BtnXYChangeDown_Click">6</RepeatButton>
+                </Grid>                
+                <Label Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" Margin="5">FlowField (Z) Change:</Label>
+                <Grid Grid.Row="5" Grid.Column="1" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="13" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="13" />
+                        <RowDefinition Height="13" />
+                    </Grid.RowDefinitions>
+                    <TextBox Name="TxtZChange" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" TextAlignment="Center"></TextBox>
+                    <RepeatButton Name="BtnZChangeUP"  Grid.Column="1" Grid.Row="0" FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="BtnZChangeUP_Click">5</RepeatButton>
+                    <RepeatButton Name="BtnZChangeDown"  Grid.Column="1" Grid.Row="1" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="13" VerticalAlignment="Bottom" Click="BtnZChangeDown_Click">6</RepeatButton>
+                </Grid>
+                <Label Grid.Row="6" Grid.Column="0" HorizontalAlignment="Right" Margin="5">Particle Trail Length:</Label>
+                <Grid Grid.Row="6" Grid.Column="1" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="13" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="13" />
+                        <RowDefinition Height="13" />
+                    </Grid.RowDefinitions>
+                    <TextBox Name="TxtTrailLength" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" TextAlignment="Center"></TextBox>
+                    <RepeatButton Name="BtnTrailLengthUP"  Grid.Column="1" Grid.Row="0" FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="BtnTrailLengthUP_Click">5</RepeatButton>
+                    <RepeatButton Name="BtnTrailLengthDown"  Grid.Column="1" Grid.Row="1" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="13" VerticalAlignment="Bottom" Click="BtnTrailLengthDown_Click">6</RepeatButton>
+                </Grid>
+                <CheckBox Grid.Row="7" Grid.Column="0" Margin="10" Name="CBRndSpawn">Random Spawning</CheckBox>
+                <StackPanel Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" >
+                    <CheckBox Grid.Row="8" Grid.Column="0" Margin="10" Name="CBUseColor">Use Color</CheckBox>
+                    <Button Grid.Row="8" Grid.Column="1" Margin="20,10,10,10" Width="100" Height="25" Name="BtnSave" Click="BtnSave_Click">Add to Favorites</Button>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+        <Grid  Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Margin="8" Width="80" Height="25" Name="BtnStart" Click="BtnStart_Click">START</Button>
+            <Button Grid.Column="2" Margin="8" Width="80" Height="25" Name="BtnClose" Click="BtnClose_Click">EXIT</Button>
+        </Grid>        
+    </Grid>
+</Window>

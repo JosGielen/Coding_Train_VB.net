@@ -1,0 +1,20 @@
+﻿<Window x:Class="MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PerlinFlowField"
+        mc:Ignorable="d"
+        Title="Perlin Noise Flow field" Height="850" Width="1000" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged" LocationChanged="Window_LocationChanged" Closing="Window_Closing">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" BorderBrush="Blue" BorderThickness="2.0" Margin="10">
+            <Canvas  Name="canvas1" SnapsToDevicePixels="True">
+                <Image Name="Image1"></Image>
+            </Canvas>
+        </Border>
+    </Grid>
+</Window>
