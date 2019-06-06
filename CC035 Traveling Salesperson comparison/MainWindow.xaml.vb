@@ -38,7 +38,7 @@
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
         'Create the locations
         locCount = 10
-        popCount = 500
+        popCount = 2000
         TxtLocationCount.Text = locCount.ToString()
         Init()
         App_Loaded = True
@@ -129,7 +129,7 @@
             E1.SetValue(Canvas.LeftProperty, locations(I).X - 3)
             canvas2.Children.Add(E1)
         Next
-        TotalPermutations = fact(locCount)
+        If locCount <= 20 Then TotalPermutations = fact(locCount)
         bestDistance2 = Double.MaxValue
         finished = False
         Counter2 = 0
@@ -273,7 +273,9 @@
                     finished = True
                 End If
             Next
-            TxtResult2.Text = findTime & Math.Round(100 * Counter2 / TotalPermutations, 5).ToString() & "% completed. )"
+
+            TxtResult2.Text = findTime
+            If locCount <= 20 Then TxtResult2.Text &= Math.Round(100 * Counter2 / TotalPermutations, 5).ToString() & "% completed. )"
             'Show the best of the current loop
             path2.Points.Clear()
             For J As Integer = 0 To locations.Count - 1
