@@ -1,0 +1,65 @@
+﻿<Window x:Class="MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StarPatterns"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="770" Width="1000" Loaded="Window_Loaded" Closing="Window_Closing">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="0" Margin="10" BorderBrush="Black" BorderThickness="4">
+            <Canvas Name="canvas1" ClipToBounds="True"></Canvas>
+        </Border>
+        <StackPanel Grid.Column="1" Margin="10">
+            <ListBox SelectedIndex="0" Name="LstTiling" SelectionChanged="ListBox_SelectionChanged" Margin="0,0,0,20" Height="300">
+                <ListBoxItem>Triangle Tiling #1</ListBoxItem>
+                <ListBoxItem>Triangle Tiling #2</ListBoxItem>
+                <ListBoxItem>Triangle Tiling #3</ListBoxItem>
+                <ListBoxItem>Rectangle Tiling #1</ListBoxItem>
+                <ListBoxItem>Rectangle Tiling #2</ListBoxItem>
+                <ListBoxItem>Pentagon Tiling</ListBoxItem>
+                <ListBoxItem>Hexagon Tiling #1</ListBoxItem>
+                <ListBoxItem>Hexagon Tiling #2</ListBoxItem>
+                <ListBoxItem>Octagon Tiling #1</ListBoxItem>
+                <ListBoxItem>OctagonTiling #2</ListBoxItem>
+                <ListBoxItem>Decagon Tiling</ListBoxItem>
+                <ListBoxItem>Dodecagon Tiling #1</ListBoxItem>
+                <ListBoxItem>Dodecagon Tiling #2</ListBoxItem>
+            </ListBox>
+            <GroupBox Header="Tile Sizes">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0">Horizontal Size:</Label>
+                    <Slider Grid.Row="1" Margin="5,5,5,20" Name="SldHorSize" ValueChanged="Sld_ValueChanged"  Minimum="10" Maximum="200" SmallChange="1" LargeChange="5" TickFrequency="10" TickPlacement="BottomRight"></Slider>
+                    <Label Grid.Row="2">Vertical Size:</Label>
+                    <Slider Grid.Row="3" Margin="5,5,5,20" Name="SldVertSize" ValueChanged="Sld_ValueChanged"  Minimum="10" Maximum="200" SmallChange="1" LargeChange="5" TickFrequency="10" TickPlacement="BottomRight"></Slider>
+                </Grid>
+            </GroupBox>
+            <GroupBox Header="Star Parameters">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0">Midpoint spacing:</Label>
+                    <Slider Grid.Row="1" Margin="5,5,5,20" Name="SldDelta" ValueChanged="SldDelta_ValueChanged"  Minimum="0" Maximum="50" SmallChange="1" LargeChange="5" TickFrequency="5" TickPlacement="BottomRight"></Slider>
+                    <Label Grid.Row="2">Hankin Angle:</Label>
+                    <Slider Grid.Row="3" Margin="5,5,5,20" Name="SldAngle" ValueChanged="SldAngle_ValueChanged"  Minimum="0" Maximum="90" SmallChange="1" LargeChange="5" TickFrequency="10" TickPlacement="BottomRight"></Slider>
+                    <CheckBox Grid.Row="4" Name="CbShowStar" IsChecked="true" Click="CbShowStar_Click">Show Stars</CheckBox>
+                </Grid>
+            </GroupBox>
+        </StackPanel>
+    </Grid>
+</Window>
