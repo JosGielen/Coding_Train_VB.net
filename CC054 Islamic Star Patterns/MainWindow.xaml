@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StarPatterns"
         mc:Ignorable="d"
-        Title="MainWindow" Height="770" Width="1000" Loaded="Window_Loaded" Closing="Window_Closing">
+        Title="MainWindow" Height="850" Width="1000" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -15,7 +15,7 @@
             <Canvas Name="canvas1" ClipToBounds="True"></Canvas>
         </Border>
         <StackPanel Grid.Column="1" Margin="10">
-            <ListBox SelectedIndex="0" Name="LstTiling" SelectionChanged="ListBox_SelectionChanged" Margin="0,0,0,20" Height="300">
+            <ListBox SelectedIndex="0" Name="LstTiling" SelectionChanged="ListBox_SelectionChanged" Margin="0,0,0,10" Height="280">
                 <ListBoxItem>Triangle Tiling #1</ListBoxItem>
                 <ListBoxItem>Triangle Tiling #2</ListBoxItem>
                 <ListBoxItem>Triangle Tiling #3</ListBoxItem>
@@ -38,12 +38,59 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Label Grid.Row="0">Horizontal Size:</Label>
-                    <Slider Grid.Row="1" Margin="5,5,5,20" Name="SldHorSize" ValueChanged="Sld_ValueChanged"  Minimum="10" Maximum="200" SmallChange="1" LargeChange="5" TickFrequency="10" TickPlacement="BottomRight"></Slider>
-                    <Label Grid.Row="2">Vertical Size:</Label>
-                    <Slider Grid.Row="3" Margin="5,5,5,20" Name="SldVertSize" ValueChanged="Sld_ValueChanged"  Minimum="10" Maximum="200" SmallChange="1" LargeChange="5" TickFrequency="10" TickPlacement="BottomRight"></Slider>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0">Horizontal:</Label>
+                    <Grid Grid.Row="0" Grid.Column="1" Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="13" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="13" />
+                            <RowDefinition Height="13" />
+                        </Grid.RowDefinitions>
+                        <TextBox Name="TxtHorSize"  Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" TextAlignment="Center" TextChanged="TxtHorSize_TextChanged">4</TextBox>
+                        <RepeatButton Name="BtnHorSizeUP"  Grid.Column="1" Grid.Row="0" FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="BtnHorSizeUP_Click">5</RepeatButton>
+                        <RepeatButton Name="BtnHorSizeDown"  Grid.Column="1" Grid.Row="1" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="13" VerticalAlignment="Bottom" Click="BtnHorSizeDown_Click">6</RepeatButton>
+                    </Grid>
+                    <Label Grid.Row="1" Grid.Column="0">Vertical:</Label>
+                    <Grid Grid.Row="1" Grid.Column="1" Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="13" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="13" />
+                            <RowDefinition Height="13" />
+                        </Grid.RowDefinitions>
+                        <TextBox Name="TxtVertSize"  Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" TextAlignment="Center" TextChanged="TxtVertSize_TextChanged">4</TextBox>
+                        <RepeatButton Name="BtnVertSizeUP"  Grid.Column="1" Grid.Row="0" FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="BtnVertSizeUP_Click">5</RepeatButton>
+                        <RepeatButton Name="BtnVertSizeDown"  Grid.Column="1" Grid.Row="1" FontSize="8"  FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="13" VerticalAlignment="Bottom" Click="BtnVertSizeDown_Click">6</RepeatButton>
+                    </Grid>
                 </Grid>
             </GroupBox>
+            <GroupBox Header="Tile Colors" Margin="0,10,0,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <ComboBox Grid.Row="0" Name="CmbColor1" SelectionChanged="GetColors" Margin="0,5,0,0"></ComboBox>
+                    <ComboBox Grid.Row="1" Name="CmbColor2" SelectionChanged="GetColors"></ComboBox>
+                    <ComboBox Grid.Row="2" Name="CmbColor3" SelectionChanged="GetColors"></ComboBox>
+                    <ComboBox Grid.Row="3" Name="CmbColor4" SelectionChanged="GetColors"></ComboBox>
+                    <ComboBox Grid.Row="4" Name="CmbColor5" SelectionChanged="GetColors"></ComboBox>
+                    <ComboBox Grid.Row="5" Name="CmbColor6" SelectionChanged="GetColors"></ComboBox>
+                </Grid>
+            </GroupBox>
+
             <GroupBox Header="Star Parameters">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -52,12 +99,16 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0">Midpoint spacing:</Label>
-                    <Slider Grid.Row="1" Margin="5,5,5,20" Name="SldDelta" ValueChanged="SldDelta_ValueChanged"  Minimum="0" Maximum="50" SmallChange="1" LargeChange="5" TickFrequency="5" TickPlacement="BottomRight"></Slider>
+                    <Slider Grid.Row="1" Margin="5" Name="SldDelta" ValueChanged="SldDelta_ValueChanged"  Minimum="0" Maximum="50" SmallChange="1" LargeChange="5" TickFrequency="5" TickPlacement="BottomRight"></Slider>
                     <Label Grid.Row="2">Hankin Angle:</Label>
-                    <Slider Grid.Row="3" Margin="5,5,5,20" Name="SldAngle" ValueChanged="SldAngle_ValueChanged"  Minimum="0" Maximum="90" SmallChange="1" LargeChange="5" TickFrequency="10" TickPlacement="BottomRight"></Slider>
-                    <CheckBox Grid.Row="4" Name="CbShowStar" IsChecked="true" Click="CbShowStar_Click">Show Stars</CheckBox>
+                    <Slider Grid.Row="3" Margin="5" Name="SldAngle" ValueChanged="SldAngle_ValueChanged"  Minimum="0" Maximum="90" SmallChange="1" LargeChange="5" TickFrequency="10" TickPlacement="BottomRight"></Slider>
+                    <Label Grid.Row="4" Margin="5">Star Color:</Label>
+                    <ComboBox Grid.Row="5" Name="CmbStarColor" SelectionChanged="GetColors"></ComboBox>
+                    <CheckBox Grid.Row="6" Name="CbShowStar" IsChecked="true" Click="CbShowStar_Click" Margin="0,10,0,0">Show Stars</CheckBox>
                 </Grid>
             </GroupBox>
         </StackPanel>

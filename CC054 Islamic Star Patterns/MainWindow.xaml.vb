@@ -4,16 +4,76 @@
     Private TileHeight As Double = 50.0
     Private delta As Double = 0
     Private angle As Double = 60
+    Private FillColor1 As Brush = Brushes.LightGreen
+    Private FillColor2 As Brush = Brushes.Orange
+    Private FillColor3 As Brush = Brushes.LightBlue
+    Private FillColor4 As Brush = Brushes.Pink
+    Private FillColor5 As Brush = Brushes.Beige
+    Private FillColor6 As Brush = Brushes.LightCyan
     Private StarColor As Brush = Brushes.Yellow
+    Private My_Brushes As List(Of Brush)
     Private App_Loaded As Boolean = False
 
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
-        SldHorSize.Value = TileLength
-        SldVertSize.Value = TileHeight
+        'SldHorSize.Value = TileLength
+        'SldVertSize.Value = TileHeight
+        TxtHorSize.Text = TileLength.ToString()
+        TxtVertSize.Text = TileHeight.ToString()
         SldDelta.Value = delta
         SldAngle.Value = angle
         LstTiling.SelectedIndex = 0
+        My_Brushes = New List(Of Brush)
+        Dim BrushesType As Type = GetType(Brushes)
+        Dim bc As BrushConverter = New BrushConverter()
+        For Each propinfo As System.Reflection.PropertyInfo In BrushesType.GetProperties
+            If propinfo.PropertyType = GetType(SolidColorBrush) Then
+                CmbColor1.Items.Add(propinfo.Name)
+                CmbColor2.Items.Add(propinfo.Name)
+                CmbColor3.Items.Add(propinfo.Name)
+                CmbColor4.Items.Add(propinfo.Name)
+                CmbColor5.Items.Add(propinfo.Name)
+                CmbColor6.Items.Add(propinfo.Name)
+                CmbStarColor.Items.Add(propinfo.Name)
+                My_Brushes.Add(CType(bc.ConvertFromString(propinfo.Name), Brush))
+            End If
+        Next
+        For I As Integer = 0 To My_Brushes.Count - 1
+            If bc.ConvertToString(My_Brushes(I)) = bc.ConvertToString(FillColor1) Then
+                CmbColor1.SelectedIndex = I
+            End If
+            If bc.ConvertToString(My_Brushes(I)) = bc.ConvertToString(FillColor2) Then
+                CmbColor2.SelectedIndex = I
+            End If
+            If bc.ConvertToString(My_Brushes(I)) = bc.ConvertToString(FillColor3) Then
+                CmbColor3.SelectedIndex = I
+            End If
+            If bc.ConvertToString(My_Brushes(I)) = bc.ConvertToString(FillColor4) Then
+                CmbColor4.SelectedIndex = I
+            End If
+            If bc.ConvertToString(My_Brushes(I)) = bc.ConvertToString(FillColor5) Then
+                CmbColor5.SelectedIndex = I
+            End If
+            If bc.ConvertToString(My_Brushes(I)) = bc.ConvertToString(FillColor6) Then
+                CmbColor6.SelectedIndex = I
+            End If
+            If bc.ConvertToString(My_Brushes(I)) = bc.ConvertToString(StarColor) Then
+                CmbStarColor.SelectedIndex = I
+            End If
+        Next
         App_Loaded = True
+        DrawTiles()
+    End Sub
+
+    Private Sub GetColors()
+        If Not App_Loaded Then Exit Sub
+        Dim bc As BrushConverter = New BrushConverter()
+        FillColor1 = CType(bc.ConvertFromString(CmbColor1.SelectedItem), Brush)
+        FillColor2 = CType(bc.ConvertFromString(CmbColor2.SelectedItem), Brush)
+        FillColor3 = CType(bc.ConvertFromString(CmbColor3.SelectedItem), Brush)
+        FillColor4 = CType(bc.ConvertFromString(CmbColor4.SelectedItem), Brush)
+        FillColor5 = CType(bc.ConvertFromString(CmbColor5.SelectedItem), Brush)
+        FillColor6 = CType(bc.ConvertFromString(CmbColor6.SelectedItem), Brush)
+        StarColor = CType(bc.ConvertFromString(CmbStarColor.SelectedItem), Brush)
         DrawTiles()
     End Sub
 
@@ -70,14 +130,14 @@
             T.AddPoint(X0, Y0)
             T.AddPoint(X0 + L, Y0)
             T.AddPoint(X0 + L, Y0 + H)
-            T.FillColor = Brushes.LightGreen
+            T.FillColor = FillColor1
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
             T.AddPoint(X0, Y0)
             T.AddPoint(X0 + L, Y0 + H)
             T.AddPoint(X0, Y0 + H)
-            T.FillColor = Brushes.Orange
+            T.FillColor = FillColor2
             T.StarColor = StarColor
             Tiles.Add(T)
             X0 = X0 + L
@@ -101,28 +161,28 @@
             T.AddPoint(X0, Y0)
             T.AddPoint(X0 + L, Y0)
             T.AddPoint(X0 + L / 2, Y0 + H / 2)
-            T.FillColor = Brushes.LightBlue
+            T.FillColor = FillColor1
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
             T.AddPoint(X0 + L, Y0)
             T.AddPoint(X0 + L, Y0 + H)
             T.AddPoint(X0 + L / 2, Y0 + H / 2)
-            T.FillColor = Brushes.Orange
+            T.FillColor = FillColor2
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
             T.AddPoint(X0 + L, Y0 + H)
             T.AddPoint(X0, Y0 + H)
             T.AddPoint(X0 + L / 2, Y0 + H / 2)
-            T.FillColor = Brushes.Pink
+            T.FillColor = FillColor3
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
             T.AddPoint(X0, Y0 + H)
             T.AddPoint(X0, Y0)
             T.AddPoint(X0 + L / 2, Y0 + H / 2)
-            T.FillColor = Brushes.LightGreen
+            T.FillColor = FillColor4
             T.StarColor = StarColor
             Tiles.Add(T)
             X0 = X0 + L
@@ -147,14 +207,14 @@
             T.AddPoint(X0, Y0 - H)
             T.AddPoint(X0 + L / 2, Y0)
             T.AddPoint(X0 - L / 2, Y0)
-            T.FillColor = Brushes.LightGreen
+            T.FillColor = FillColor1
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
             T.AddPoint(X0 + L / 2, Y0)
             T.AddPoint(X0, Y0 + H)
             T.AddPoint(X0 - L / 2, Y0)
-            T.FillColor = Brushes.Orange
+            T.FillColor = FillColor2
             T.StarColor = StarColor
             Tiles.Add(T)
             X0 = X0 + L
@@ -185,7 +245,7 @@
             T.AddPoint(X0 + L, Y0)
             T.AddPoint(X0 + L, Y0 + H)
             T.AddPoint(X0, Y0 + H)
-            T.FillColor = Brushes.LightGreen
+            T.FillColor = FillColor1
             T.StarColor = StarColor
             Tiles.Add(T)
             X0 = X0 + L
@@ -210,7 +270,7 @@
             T.AddPoint(X0 + L, Y0 + H)
             T.AddPoint(X0 + L, Y0 + L)
             T.AddPoint(X0 + H, Y0 + L)
-            T.FillColor = Brushes.Yellow
+            T.FillColor = FillColor5
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
@@ -218,7 +278,7 @@
             T.AddPoint(X0 + H, Y0)
             T.AddPoint(X0 + H, Y0 + L)
             T.AddPoint(X0, Y0 + L)
-            T.FillColor = Brushes.LightGreen
+            T.FillColor = FillColor2
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
@@ -226,7 +286,7 @@
             T.AddPoint(X0 + H + L, Y0)
             T.AddPoint(X0 + H + L, Y0 + H)
             T.AddPoint(X0 + H, Y0 + H)
-            T.FillColor = Brushes.Orange
+            T.FillColor = FillColor3
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
@@ -234,7 +294,7 @@
             T.AddPoint(X0 + L, Y0 + L)
             T.AddPoint(X0 + L, Y0 + H + L)
             T.AddPoint(X0, Y0 + H + L)
-            T.FillColor = Brushes.Pink
+            T.FillColor = FillColor4
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
@@ -242,7 +302,7 @@
             T.AddPoint(X0 + H + L, Y0 + H)
             T.AddPoint(X0 + H + L, Y0 + H + L)
             T.AddPoint(X0 + L, Y0 + H + L)
-            T.FillColor = Brushes.LightBlue
+            T.FillColor = FillColor1
             T.StarColor = StarColor
             Tiles.Add(T)
             X0 = X0 + H + L
@@ -270,7 +330,7 @@
             T.AddPoint(X0 + L / 2, Y0 + H2)
             T.AddPoint(X0 + W + L / 2, Y0 + H1 + H2)
             T.AddPoint(X0 + W - L / 2, Y0 + H1 + H2)
-            T.FillColor = Brushes.Orange
+            T.FillColor = FillColor1
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
@@ -279,7 +339,7 @@
             T.AddPoint(X0 + L / 2, Y0 + H2)
             T.AddPoint(X0 - L / 2, Y0 + H2)
             T.AddPoint(X0 - W, Y0)
-            T.FillColor = Brushes.LightGreen
+            T.FillColor = FillColor2
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
@@ -288,7 +348,7 @@
             T.AddPoint(X0 + 2 * W + L / 2, Y0 + H2)
             T.AddPoint(X0 + W + L / 2, Y0 + H1 + H2)
             T.AddPoint(X0 + L / 2, Y0 + H2)
-            T.FillColor = Brushes.LightBlue
+            T.FillColor = FillColor3
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
@@ -297,7 +357,7 @@
             T.AddPoint(X0, Y0 + H1 + 2 * H2)
             T.AddPoint(X0 - L, Y0 + H1 + 2 * H2)
             T.AddPoint(X0 - W - L / 2, Y0 + H1 + H2)
-            T.FillColor = Brushes.LightGreen
+            T.FillColor = FillColor4
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
@@ -306,7 +366,7 @@
             T.AddPoint(X0 + 2 * W, Y0 + H1 + 2 * H2)
             T.AddPoint(X0 + W, Y0 + 2 * (H1 + H2))
             T.AddPoint(X0, Y0 + H1 + 2 * H2)
-            T.FillColor = Brushes.LightBlue
+            T.FillColor = FillColor5
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
@@ -314,7 +374,7 @@
             T.AddPoint(X0 + 2 * W + L, Y0 + H1 + 2 * H2)
             T.AddPoint(X0 + W + L, Y0 + 2 * (H1 + H2))
             T.AddPoint(X0 + W, Y0 + 2 * (H1 + H2))
-            T.FillColor = Brushes.Orange
+            T.FillColor = FillColor1
             T.StarColor = StarColor
             Tiles.Add(T)
             X0 = X0 + 2 * W + L
@@ -342,7 +402,7 @@
             T.AddPoint(X0 + L, Y0 + H)
             T.AddPoint(X0, Y0 + H)
             T.AddPoint(X0 - L / 2, Y0)
-            T.FillColor = Brushes.LightGreen
+            T.FillColor = FillColor1
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
@@ -352,7 +412,7 @@
             T.AddPoint(X0 + 5 * L / 2, Y0 + 2 * H)
             T.AddPoint(X0 + 3 * L / 2, Y0 + 2 * H)
             T.AddPoint(X0 + L, Y0 + H)
-            T.FillColor = Brushes.Orange
+            T.FillColor = FillColor2
             T.StarColor = StarColor
             Tiles.Add(T)
             X0 = X0 + 3 * L
@@ -382,7 +442,7 @@
             T.AddPoint(X0 + L, Y0 + 2 * H)
             T.AddPoint(X0, Y0 + 2 * H)
             T.AddPoint(X0 - W, Y0 + H)
-            T.FillColor = Brushes.LightGreen
+            T.FillColor = FillColor1
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
@@ -390,7 +450,7 @@
             T.AddPoint(X0, Y0 + 2 * H)
             T.AddPoint(X0 - H, Y0 + 2 * H + W)
             T.AddPoint(X0 - H - W, Y0 + H + W)
-            T.FillColor = Brushes.LightBlue
+            T.FillColor = FillColor2
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
@@ -398,7 +458,7 @@
             T.AddPoint(X0 + L, Y0 + 2 * H)
             T.AddPoint(X0 + L, Y0 + L + 2 * H)
             T.AddPoint(X0, Y0 + L + 2 * H)
-            T.FillColor = Brushes.Pink
+            T.FillColor = FillColor3
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
@@ -406,21 +466,21 @@
             T.AddPoint(X0 + L + H + W, Y0 + H + W)
             T.AddPoint(X0 + L + H, Y0 + 2 * H + W)
             T.AddPoint(X0 + L, Y0 + 2 * H)
-            T.FillColor = Brushes.LightBlue
+            T.FillColor = FillColor3
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
             T.AddPoint(X0, Y0 + 2 * H)
             T.AddPoint(X0, Y0 + L + 2 * H)
             T.AddPoint(X0 - H, Y0 + 2 * H + W)
-            T.FillColor = Brushes.Orange
+            T.FillColor = FillColor4
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
             T.AddPoint(X0 + L, Y0 + 2 * H)
             T.AddPoint(X0 + L + H, Y0 + 2 * H + W)
             T.AddPoint(X0 + L, Y0 + L + 2 * H)
-            T.FillColor = Brushes.Orange
+            T.FillColor = FillColor4
             T.StarColor = StarColor
             Tiles.Add(T)
             X0 = X0 + L + H + W
@@ -463,7 +523,7 @@
             T.AddPoint(X0, Y0 + L + H)
             T.AddPoint(X0 - H, Y0 + L)
             T.AddPoint(X0 - H, Y0)
-            T.FillColor = Brushes.LightGreen
+            T.FillColor = FillColor1
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
@@ -471,7 +531,7 @@
             T.AddPoint(X0 + L + 2 * H, Y0 + L + H)
             T.AddPoint(X0 + L + H, Y0 + L + 2 * H)
             T.AddPoint(X0 + L, Y0 + L + H)
-            T.FillColor = Brushes.Orange
+            T.FillColor = FillColor2
             T.StarColor = StarColor
             Tiles.Add(T)
             X0 = X0 + L + 2 * H
@@ -501,7 +561,7 @@
             T.AddPoint(X0 + H, Y0 + H + L)
             T.AddPoint(X0, Y0 + L)
             T.AddPoint(X0, Y0)
-            T.FillColor = Brushes.LightGreen
+            T.FillColor = FillColor1
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
@@ -509,7 +569,7 @@
             T.AddPoint(X0 + 2 * (H + L), Y0)
             T.AddPoint(X0 + 2 * (H + L), Y0 + L)
             T.AddPoint(X0 + 2 * H + L, Y0 + L)
-            T.FillColor = Brushes.LightBlue
+            T.FillColor = FillColor3
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
@@ -521,7 +581,7 @@
             T.AddPoint(X0 - L, Y0 + 2 * (L + H))
             T.AddPoint(X0 - L - H, Y0 + 2 * L + H)
             T.AddPoint(X0 - L - H, Y0 + L + H)
-            T.FillColor = Brushes.Orange
+            T.FillColor = FillColor2
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
@@ -529,7 +589,7 @@
             T.AddPoint(X0 + L + H, Y0 + H + L)
             T.AddPoint(X0 + L + H, Y0 + H + 2 * L)
             T.AddPoint(X0 + H, Y0 + H + 2 * L)
-            T.FillColor = Brushes.Pink
+            T.FillColor = FillColor4
             T.StarColor = StarColor
             Tiles.Add(T)
             X0 = X0 + 2 * (L + H)
@@ -564,7 +624,7 @@
             T.AddPoint(X0 + W1 + W2, Y0 + L + H1 + H2)
             T.AddPoint(X0 + W1, Y0 + L + H1)
             T.AddPoint(X0, Y0 + L)
-            T.FillColor = Brushes.LightGreen
+            T.FillColor = FillColor1
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
@@ -574,7 +634,7 @@
             T.AddPoint(X0 + 2 * W1 + W2, Y0 + L + 2 * H1 + H2)
             T.AddPoint(X0 + W1 + W2, Y0 + L + H1 + H2)
             T.AddPoint(X0 + W1 + 2 * W2, Y0 + L + H1)
-            T.FillColor = Brushes.LightBlue
+            T.FillColor = FillColor3
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
@@ -588,7 +648,7 @@
             T.AddPoint(X0 - W2, Y0 + 2 * (L + H1) + H2)
             T.AddPoint(X0 - W2, Y0 + L + 2 * H1 + H2)
             T.AddPoint(X0 + W1 - W2, Y0 + L + H1 + H2)
-            T.FillColor = Brushes.Orange
+            T.FillColor = FillColor2
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
@@ -598,7 +658,7 @@
             T.AddPoint(X0 + 2 * (W1 + W2), Y0 + 2 * L + 4 * H1 + 2 * H2)
             T.AddPoint(X0 + W1 + 2 * W2, Y0 + 2 * L + 3 * H1 + 2 * H2)
             T.AddPoint(X0 + W1 + W2, Y0 + 2 * L + 3 * H1 + H2)
-            T.FillColor = Brushes.Pink
+            T.FillColor = FillColor3
             T.StarColor = StarColor
             Tiles.Add(T)
             X0 = X0 + 2 * (W1 + W2)
@@ -636,7 +696,7 @@
             T.AddPoint(X0, Y0 + L + 2 * H1)
             T.AddPoint(X0 - W1, Y0 + L + H1)
             T.AddPoint(X0 - W1, Y0 + H1)
-            T.FillColor = Brushes.LightGreen
+            T.FillColor = FillColor1
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
@@ -644,7 +704,7 @@
             T.AddPoint(X0, Y0 + L + 2 * H1)
             T.AddPoint(X0 - W2, Y0 + L + 2 * H1 + H2)
             T.AddPoint(X0 - W2 - W1, Y0 + L + H1 + H2)
-            T.FillColor = Brushes.LightBlue
+            T.FillColor = FillColor3
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
@@ -652,7 +712,7 @@
             T.AddPoint(X0 + L + W2, Y0 + L + 2 * H1 + H2)
             T.AddPoint(X0 + L + W2, Y0 + 2 * L + 2 * H1 + H2)
             T.AddPoint(X0 + W2, Y0 + 2 * L + 2 * H1 + H2)
-            T.FillColor = Brushes.Pink
+            T.FillColor = FillColor4
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
@@ -660,7 +720,7 @@
             T.AddPoint(X0 + L + 3 * W2 + W1, Y0 + L + H1 + H2)
             T.AddPoint(X0 + L + 3 * W2, Y0 + L + 2 * H1 + H2)
             T.AddPoint(X0 + L + 2 * W2, Y0 + L + 2 * H1)
-            T.FillColor = Brushes.Yellow
+            T.FillColor = FillColor5
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
@@ -670,7 +730,7 @@
             T.AddPoint(X0, Y0 + 2 * (L + H1 + H2))
             T.AddPoint(X0 - W2, Y0 + 2 * L + 2 * H1 + H2)
             T.AddPoint(X0 - W2, Y0 + L + 2 * H1 + H2)
-            T.FillColor = Brushes.Orange
+            T.FillColor = FillColor2
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
@@ -680,7 +740,7 @@
             T.AddPoint(X0 + L + 2 * W2, Y0 + 2 * (L + H1 + H2))
             T.AddPoint(X0 + L + W2, Y0 + 2 * L + 2 * H1 + H2)
             T.AddPoint(X0 + L + W2, Y0 + L + 2 * H1 + H2)
-            T.FillColor = Brushes.LightCyan
+            T.FillColor = FillColor6
             T.StarColor = StarColor
             Tiles.Add(T)
             X0 = X0 + L + 3 * W2 + W1
@@ -729,7 +789,7 @@
             T.AddPoint(X0 - 3 * H1 - 2 * H2, Y0)
             T.AddPoint(X0 - 3 * H1 - H2, Y0 - H1 - H2)
             T.AddPoint(X0 - 2 * H1 - H2, Y0 - 2 * H1 - H2)
-            T.FillColor = Brushes.LightGreen
+            T.FillColor = FillColor1
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
@@ -737,35 +797,35 @@
             T.AddPoint(X0 + 2 * (H1 + H2), Y0 - H1)
             T.AddPoint(X0 + 3 * H1 + 2 * H2, Y0)
             T.AddPoint(X0 + 2 * (H1 + H2), Y0 + H1)
-            T.FillColor = Brushes.Orange
+            T.FillColor = FillColor2
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
             T.AddPoint(X0 - 3 * H1 - 2 * H2, Y0)
             T.AddPoint(X0 - 3 * H1 - H2, Y0 + H1 + H2)
             T.AddPoint(X0 - 4 * H1 - 2 * H2, Y0 + H1)
-            T.FillColor = Brushes.LightBlue
+            T.FillColor = FillColor3
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
             T.AddPoint(X0 - 2 * H1 - H2, Y0 + 2 * H1 + H2)
             T.AddPoint(X0 - H1, Y0 + 2 * (H1 + H2))
             T.AddPoint(X0 - 2 * H1, Y0 + 3 * H1 + 2 * H2)
-            T.FillColor = Brushes.Pink
+            T.FillColor = FillColor3
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
             T.AddPoint(X0 - H1, Y0 + 2 * (H1 + H2))
             T.AddPoint(X0 + H2, Y0 + +2 * H1 + H2)
             T.AddPoint(X0, Y0 + 3 * H1 + 2 * H2)
-            T.FillColor = Brushes.Pink
+            T.FillColor = FillColor4
             T.StarColor = StarColor
             Tiles.Add(T)
             T = New Tile()
             T.AddPoint(X0 + H1 + 2 * H2, Y0)
             T.AddPoint(X0 + 2 * (H1 + H2), Y0 + H1)
             T.AddPoint(X0 + H1 + H2, Y0 + H1 + H2)
-            T.FillColor = Brushes.LightBlue
+            T.FillColor = FillColor4
             T.StarColor = StarColor
             Tiles.Add(T)
             X0 = X0 + 3 * H1 + 2 * H2
@@ -802,11 +862,74 @@
         DrawTiles()
     End Sub
 
-    Private Sub Sld_ValueChanged(sender As Object, e As RoutedPropertyChangedEventArgs(Of Double))
-        If Not App_Loaded Then Exit Sub
-        TileLength = SldHorSize.Value
-        TileHeight = SldVertSize.Value
-        DrawTiles()
+    Private Sub BtnHorSizeUP_Click(sender As Object, e As RoutedEventArgs)
+        Try
+            TileLength = Double.Parse(TxtHorSize.Text)
+            TileLength += 5
+            If TileLength > canvas1.ActualWidth Then TileLength = Math.Floor(canvas1.ActualWidth)
+            TxtHorSize.Text = TileLength.ToString()
+        Catch ex As Exception
+            'Do nothing
+        End Try
+    End Sub
+
+    Private Sub BtnHorSizeDown_Click(sender As Object, e As RoutedEventArgs)
+        Try
+            TileLength = Double.Parse(TxtHorSize.Text)
+            TileLength -= 5
+            If TileLength < 10 Then TileLength = 10
+            TxtHorSize.Text = TileLength.ToString()
+        Catch ex As Exception
+            'Do nothing
+        End Try
+    End Sub
+
+    Private Sub TxtHorSize_TextChanged(sender As Object, e As TextChangedEventArgs)
+        Dim dummy As Double
+        Try
+            dummy = Double.Parse(TxtHorSize.Text)
+            If dummy >= 5 And dummy <= canvas1.ActualWidth Then
+                TileLength = dummy
+                DrawTiles()
+            End If
+        Catch ex As Exception
+            'Do nothing
+        End Try
+    End Sub
+
+    Private Sub BtnVertSizeUP_Click(sender As Object, e As RoutedEventArgs)
+        Try
+            TileHeight = Double.Parse(TxtVertSize.Text)
+            TileHeight += 5
+            If TileHeight > canvas1.ActualHeight Then TileHeight = Math.Floor(canvas1.ActualHeight)
+            TxtVertSize.Text = TileHeight.ToString()
+        Catch ex As Exception
+            'Do nothing
+        End Try
+    End Sub
+
+    Private Sub BtnVertSizeDown_Click(sender As Object, e As RoutedEventArgs)
+        Try
+            TileHeight = Double.Parse(TxtVertSize.Text)
+            TileHeight -= 5
+            If TileHeight < 10 Then TileHeight = 10
+            TxtVertSize.Text = TileHeight.ToString()
+        Catch ex As Exception
+            'Do nothing
+        End Try
+    End Sub
+
+    Private Sub TxtVertSize_TextChanged(sender As Object, e As TextChangedEventArgs)
+        Dim dummy As Double
+        Try
+            dummy = Double.Parse(TxtVertSize.Text)
+            If dummy >= 5 And dummy <= canvas1.ActualHeight Then
+                TileHeight = dummy
+                DrawTiles()
+            End If
+        Catch ex As Exception
+            'Do nothing
+        End Try
     End Sub
 
     Private Sub SldDelta_ValueChanged(sender As Object, e As RoutedPropertyChangedEventArgs(Of Double))
@@ -824,4 +947,5 @@
     Private Sub CbShowStar_Click(sender As Object, e As RoutedEventArgs)
         DrawTiles()
     End Sub
+
 End Class
