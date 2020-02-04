@@ -1,42 +1,54 @@
 ﻿Imports System.Windows.Threading
 
 Class MainWindow
+    'Program members
     Private Delegate Sub MoveDelegate()
     Private AppLoaded As Boolean = False
     Private GameStarted As Boolean = False
     Private RowNum As Integer
     Private ColNum As Integer
-    Private StartIndex As Integer = 0
     Private CelWidth As Double = 0.0
     Private CelHeight As Double = 0.0
     Private Markers() As Marker
-    Private Playeraantal As Integer
+    Private PlayerCount As Integer
     Private CurrentPlayer As Integer
-    Private Player1 As String = "Player1Name"
-    Private Player2 As String = "Player2Name"
+    Private StartingPlayer As Integer
+    Private Player1 As String
+    Private Player2 As String
     Private myCol As Integer = 0
+    Private myGameMode As GameMode
     Private myDepth As Integer
+    Private Rnd As Random = New Random()
 
 #Region "Window Events"
     Private Sub Window1_Loaded(ByVal sender As Object, ByVal e As System.Windows.RoutedEventArgs) Handles Me.Loaded
         'Default start with 1 player
-        Playeraantal = 1
-        CurrentPlayer = 1 'If 1 player then Player = 1 ; Computer = 2
-        'Default start with 6 rows and 7 columns
+        PlayerCount = 1
+        Player1 = "Player"
+        Player2 = "Computer"
+        'Default start with 6 rows and 7 columns in normal difficulty mode
         RowNum = 6
         ColNum = 7
+        myGameMode = GameMode.Normal
+        myDepth = 3
         ReDim Markers(RowNum * ColNum - 1)
         For I As Integer = 0 To ColNum * RowNum - 1
             Markers(I) = New Marker()
         Next
-        Me.Width = 60 * ColNum
-        Me.Height = 60 * RowNum + 35
-        'Default start in normal difficulty mode
-        myDepth = 3
-        'Draw the empty start game
+        Width = 60 * ColNum
+        Height = 60 * RowNum + 75
         DrawGame()
-        AppLoaded = True
+        'Show a settings dialog to allow modifications
+        ShowSettings()
+        'Determine who does the first move.
+        If Rnd.Next(100) < 50 Then
+            StartingPlayer = 1
+        Else
+            StartingPlayer = 2
+        End If
+        CurrentPlayer = StartingPlayer
         GameStarted = True
+        AppLoaded = True
     End Sub
 
     Private Sub Window1_SizeChanged(ByVal sender As System.Object, ByVal e As System.Windows.SizeChangedEventArgs) Handles MyBase.SizeChanged
@@ -50,6 +62,115 @@ Class MainWindow
     End Sub
 
 #End Region
+
+#Region "Menu Events"
+
+    Private Sub MenuSave_Click(sender As Object, e As RoutedEventArgs)
+        'TODO Save the current game state
+    End Sub
+
+    Private Sub MenuLoad_Click(sender As Object, e As RoutedEventArgs)
+        'TODO Load a saved game
+    End Sub
+
+    Private Sub MenuExit_Click(ByVal sender As System.Object, ByVal e As System.Windows.RoutedEventArgs)
+        End
+    End Sub
+
+    Private Sub MnuSettings_Click(sender As Object, e As RoutedEventArgs)
+        ShowSettings()
+    End Sub
+
+    Private Sub ShowSettings()
+        Dim gs As GameSettings
+        Dim gameData As Settings = New Settings() With
+        {
+            .PlayerCount = PlayerCount,
+            .PlayerName1 = Player1,
+            .PlayerName2 = Player2,
+            .GameSize = New Size(ColNum, RowNum),
+            .GameMode = myGameMode
+        }
+        gs = New GameSettings(gameData, Me)
+        gs.Left = Left + ActualWidth
+        gs.Top = Top
+        gs.ShowDialog()
+        If gs.DialogResult = True Then
+            PlayerCount = gs.Playeraantal
+            Player1 = gs.Player1
+            Player2 = gs.Player2
+            RowNum = CInt(gs.GameSize.Height)
+            ColNum = CInt(gs.GameSize.Width)
+            myGameMode = gs.GameMode
+            If myGameMode = GameMode.Easy Then myDepth = 2
+            If myGameMode = GameMode.Normal Then myDepth = 3
+            If myGameMode = GameMode.Hard Then myDepth = 5
+            ReDim Markers(RowNum * ColNum - 1)
+            For I As Integer = 0 To ColNum * RowNum - 1
+                Markers(I) = New Marker()
+            Next
+            Width = 60 * ColNum
+            Height = 60 * RowNum + 75
+            GameStarted = True
+        End If
+        If PlayerCount = 1 Then
+            If CurrentPlayer = 2 Then 'The Computer starts in a random column
+                myCol = Rnd.Next(ColNum)
+                Markers(GetFreeIndex(myCol)).PlayerNr = 2
+                CurrentPlayer = 1
+            End If
+            TxtStatus.Text = Player1 & " Please make your move."
+        Else
+            If CurrentPlayer = 1 Then
+                TxtStatus.Text = Player1 & " please make your move."
+            Else
+                TxtStatus.Text = Player2 & " please make your move."
+            End If
+        End If
+        DrawGame()
+    End Sub
+
+    Private Sub MenuHint_Click(sender As Object, e As RoutedEventArgs)
+        'TODO Display a hint.
+    End Sub
+
+    Private Sub MenuAnalyse_Click(sender As Object, e As RoutedEventArgs)
+        'TODO Analyse the current game state.
+    End Sub
+
+    Private Sub MenuStartNew_Click(sender As Object, e As RoutedEventArgs)
+        'Clear all markers
+        For I As Integer = 0 To ColNum * RowNum - 1
+            Markers(I) = New Marker()
+        Next
+        DrawGame()
+        'The other player will now start the game
+        If StartingPlayer = 1 Then
+            StartingPlayer = 2
+        Else
+            StartingPlayer = 1
+        End If
+        CurrentPlayer = StartingPlayer
+        If PlayerCount = 1 Then
+            If CurrentPlayer = 2 Then 'The Computer starts in a random column
+                myCol = Rnd.Next(ColNum)
+                Markers(GetFreeIndex(myCol)).PlayerNr = 2
+                CurrentPlayer = 1
+            End If
+            TxtStatus.Text = Player1 & " Please make your move."
+        Else
+            If CurrentPlayer = 1 Then
+                TxtStatus.Text = Player1 & " please make your move."
+            Else
+                TxtStatus.Text = Player2 & " please make your move."
+            End If
+        End If
+        GameStarted = True
+    End Sub
+
+#End Region
+
+#Region "Business Methods"
 
     Private Sub DrawGame()
         Dim gridLine As Line
@@ -136,169 +257,64 @@ Class MainWindow
         Next
     End Sub
 
-#Region "Menu Events"
-
-    Private Sub MenuExit_Click(ByVal sender As System.Object, ByVal e As System.Windows.RoutedEventArgs)
-        End
-    End Sub
-
-    Private Sub MenuEasy_Click(sender As Object, e As RoutedEventArgs)
-        MenuEasy.IsChecked = True
-        MenuNormal.IsChecked = False
-        MenuHard.IsChecked = False
-        myDepth = 2
-    End Sub
-
-    Private Sub MenuNormal_Click(sender As Object, e As RoutedEventArgs)
-        MenuEasy.IsChecked = False
-        MenuNormal.IsChecked = True
-        MenuHard.IsChecked = False
-        myDepth = 3
-    End Sub
-
-    Private Sub MenuHard_Click(sender As Object, e As RoutedEventArgs)
-        MenuEasy.IsChecked = False
-        MenuNormal.IsChecked = False
-        MenuHard.IsChecked = True
-        myDepth = 5
-    End Sub
-
-    Private Sub Menu6x7_Click(sender As Object, e As RoutedEventArgs)
-        ColNum = 7
-        RowNum = 6
-        ReDim Markers(RowNum * ColNum - 1)
-        For I As Integer = 0 To ColNum * RowNum - 1
-            Markers(I) = New Marker()
-        Next
-        Me.Width = 60 * ColNum
-        Me.Height = 60 * RowNum + 35
-        Menu6x7.IsChecked = True
-        Menu8x8.IsChecked = False
-        Menu10x10.IsChecked = False
-        Menu12x12.IsChecked = False
-        DrawGame()
-    End Sub
-
-    Private Sub Menu8x8_Click(sender As Object, e As RoutedEventArgs)
-        ColNum = 8
-        RowNum = 8
-        ReDim Markers(RowNum * ColNum - 1)
-        For I As Integer = 0 To ColNum * RowNum - 1
-            Markers(I) = New Marker()
-        Next
-        Me.Width = 60 * ColNum
-        Me.Height = 60 * RowNum + 35
-        Menu6x7.IsChecked = False
-        Menu8x8.IsChecked = True
-        Menu10x10.IsChecked = False
-        Menu12x12.IsChecked = False
-        DrawGame()
-    End Sub
-
-    Private Sub Menu10x10_Click(sender As Object, e As RoutedEventArgs)
-        ColNum = 10
-        RowNum = 10
-        ReDim Markers(RowNum * ColNum - 1)
-        For I As Integer = 0 To ColNum * RowNum - 1
-            Markers(I) = New Marker()
-        Next
-        Me.Width = 60 * ColNum
-        Me.Height = 60 * RowNum + 35
-        Menu6x7.IsChecked = False
-        Menu8x8.IsChecked = False
-        Menu10x10.IsChecked = True
-        Menu12x12.IsChecked = False
-        DrawGame()
-    End Sub
-
-    Private Sub Menu12x12_Click(sender As Object, e As RoutedEventArgs)
-        ColNum = 12
-        RowNum = 12
-        ReDim Markers(RowNum * ColNum - 1)
-        For I As Integer = 0 To ColNum * RowNum - 1
-            Markers(I) = New Marker()
-        Next
-        Me.Width = 60 * ColNum
-        Me.Height = 60 * RowNum + 35
-        Menu6x7.IsChecked = False
-        Menu8x8.IsChecked = False
-        Menu10x10.IsChecked = False
-        Menu12x12.IsChecked = True
-        DrawGame()
-    End Sub
-
-    Private Sub MenuStartNew_Click(sender As Object, e As RoutedEventArgs)
-        For I As Integer = 0 To ColNum * RowNum - 1
-            Markers(I) = New Marker()
-        Next
-        DrawGame()
-        GameStarted = True
-    End Sub
-
-#End Region
-
-#Region "Business Methods"
-
     Private Sub Canvas1_MouseLeftButtonUp(sender As Object, e As MouseButtonEventArgs)
-        'A player clicked in the gamearea to select a column for his move
         Dim Col As Integer = 0
-        Dim FreeIndex As Integer = 0
+        Dim FreeIndex As Integer = -1
         'Check if the game is started
         If Not GameStarted Then
             e.Handled = True
             Exit Sub
         End If
+        'Determine the column where the player clicked
         For I As Integer = 0 To Markers.Length - 1
-            'Determine the column
             If Markers(I).Shape.IsMouseOver Then
                 Col = Markers(I).Col
                 FreeIndex = GetFreeIndex(Col)
-                If FreeIndex >= 0 Then
-                    If Playeraantal = 1 Then
-                        Markers(FreeIndex).PlayerNr = 1
-                        If CheckVictory() Then Exit Sub
-                        'Get the computer move
-                        Me.Dispatcher.Invoke(DispatcherPriority.SystemIdle, New MoveDelegate(AddressOf GetBestMove))
-                        'GetBestMove()
-                        FreeIndex = GetFreeIndex(myCol)
-                        If FreeIndex >= 0 Then
-                            Markers(FreeIndex).PlayerNr = 2
-                        Else
-                            Beep()
-                            'The computer made an invalid move!!!
-                            'DEBUG CODE
-                            MessageBox.Show("The computer made an invalid move!!!", "4 in a Row", MessageBoxButton.OK, MessageBoxImage.Exclamation)
-                            'END DEBUG CODE
-                        End If
-                        If CheckVictory() Then Exit Sub
-                    ElseIf Playeraantal = 2 Then
-                        Markers(FreeIndex).PlayerNr = CurrentPlayer
-                        If CheckVictory() Then Exit Sub
-                        If CurrentPlayer = 1 Then
-                            CurrentPlayer = 2
-                        Else
-                            CurrentPlayer = 1
-                        End If
-                    End If
-                Else
-                    Beep()
-                    'The player made an invalid move!!!
-                End If
             End If
         Next
+        If FreeIndex >= 0 Then
+            If PlayerCount = 1 Then
+                'Set the player marker
+                Markers(FreeIndex).PlayerNr = 1
+                If CheckVictory() Then Exit Sub
+                'Get the computer move
+                Dispatcher.Invoke(DispatcherPriority.ApplicationIdle, New MoveDelegate(AddressOf GetBestMove))
+                FreeIndex = GetFreeIndex(myCol)
+                If FreeIndex >= 0 Then
+                    Markers(FreeIndex).PlayerNr = 2
+                Else
+                    Beep() 'The computer made an invalid move!!!
+                End If
+                If CheckVictory() Then Exit Sub
+            ElseIf PlayerCount = 2 Then
+                'Set the player marker
+                Markers(FreeIndex).PlayerNr = CurrentPlayer
+                If CheckVictory() Then Exit Sub
+                'Switch to the next player
+                If CurrentPlayer = 1 Then
+                    TxtStatus.Text = Player2 & " please make your move."
+                    CurrentPlayer = 2
+                Else
+                    TxtStatus.Text = Player1 & " please make your move."
+                    CurrentPlayer = 1
+                End If
+            End If
+        Else
+            Beep() 'The player made an invalid move!!!
+        End If
     End Sub
 
     Private Sub GetBestMove()
-        Dim FreeIndex As Integer = 0
+        Dim FreeIndex As Integer
         Dim score As Integer
         Dim bestscore As Integer = Integer.MinValue
         Dim bestcol As Integer = -1
-        Me.Cursor = Cursors.Wait
+        Cursor = Cursors.Wait
         For I As Integer = 0 To ColNum - 1
             FreeIndex = GetFreeIndex(I)
             If FreeIndex > 0 Then
                 Markers(FreeIndex).PlayerNr = 2
-                score = Minimax(myDepth, I, False)
+                score = Minimax(myDepth, False)
                 If score > bestscore Then
                     bestscore = score
                     bestcol = I
@@ -307,20 +323,20 @@ Class MainWindow
             End If
         Next
         myCol = bestcol
-        Me.Cursor = Cursors.Arrow
+        Cursor = Cursors.Arrow
     End Sub
 
     ''' <summary>
     ''' Use the Minimax algorithm to estimate the best move
     ''' </summary>
-    Private Function Minimax(depth As Integer, col As Integer, maximizing As Boolean) As Integer
-        Dim FreeIndex As Integer = 0
-        Dim Score As Integer = 0
-        Dim Bestscore As Integer = 0
+    Private Function Minimax(depth As Integer, maximizing As Boolean) As Integer
+        Dim FreeIndex As Integer
+        Dim Score As Integer
+        Dim Bestscore As Integer
         Dim validmoves As Integer = 0
         Dim result As Integer = 0
         If depth = 0 Or Check4(1) > 0 Or Check4(2) > 0 Then 'return the heuristic value of the game
-            result = 1000 * Check4(2) + 100 * Check3(2) + 10 * Check2(2) - 1000 * Check4(1) - 100 * Check3(1) - 10 * Check2(1)
+            result = 5000 * Check4(2) + 100 * Check3(2) + 10 * Check2(2) - 3000 * Check4(1) - 100 * Check3(1) - 10 * Check2(1)
             Return result
         End If
         If maximizing Then
@@ -329,7 +345,7 @@ Class MainWindow
                 FreeIndex = GetFreeIndex(I)
                 If FreeIndex >= 0 Then
                     Markers(FreeIndex).PlayerNr = 2 'Computer = maximizing
-                    Score = Minimax(depth - 1, I, False)
+                    Score = Minimax(depth - 1, False)
                     If Score > Bestscore Then
                         Bestscore = Score
                     End If
@@ -347,7 +363,7 @@ Class MainWindow
                 FreeIndex = GetFreeIndex(I)
                 If FreeIndex >= 0 Then
                     Markers(FreeIndex).PlayerNr = 1 'Player = minimizing
-                    Score = Minimax(depth - 1, I, True)
+                    Score = Minimax(depth - 1, True)
                     If Score < Bestscore Then
                         Bestscore = Score
                     End If
@@ -394,31 +410,30 @@ Class MainWindow
             If Markers(I).PlayerNr = 0 Then FreeCells += 1
         Next
         If FreeCells = 0 Then
-            MessageBox.Show("Sorry, This game is a draw.", "4 in a Row", MessageBoxButton.OK, MessageBoxImage.Exclamation)
+            TxtStatus.Text = "This game is a draw."
             GameStarted = False
             Return True
         End If
-
-        If Playeraantal = 1 Then
+        If PlayerCount = 1 Then
             If Check4(1) > 0 Then
-                MessageBox.Show("Congratulations, You won!", "4 in a Row", MessageBoxButton.OK, MessageBoxImage.Exclamation)
+                TxtStatus.Text = "Congratulations, You won!"
                 GameStarted = False
                 Return True
             End If
             If Check4(2) > 0 Then
-                MessageBox.Show("Sorry, You lost!", "4 in a Row", MessageBoxButton.OK, MessageBoxImage.Exclamation)
+                TxtStatus.Text = "Sorry, You lost!"
                 GameStarted = False
                 Return True
             End If
         End If
-        If Playeraantal = 2 Then
+        If PlayerCount = 2 Then
             If Check4(1) > 0 Then
-                MessageBox.Show("Congratulations " & Player1.ToString() & ", You won!", "4 in a Row", MessageBoxButton.OK, MessageBoxImage.Exclamation)
+                TxtStatus.Text = "Congratulations " & Player1.ToString() & ", You won!"
                 GameStarted = False
                 Return True
             End If
             If Check4(2) > 0 Then
-                MessageBox.Show("Congratulations " & Player2.ToString() & ", You won!", "4 in a Row", MessageBoxButton.OK, MessageBoxImage.Exclamation)
+                TxtStatus.Text = "Congratulations " & Player2.ToString() & ", You won!"
                 GameStarted = False
                 Return True
             End If
@@ -432,15 +447,15 @@ Class MainWindow
     ''' <param name="player">The player number (1 or 2)</param>
     ''' <returns>The number of times 4 in a row was found</returns>
     Private Function Check4(ByVal player As Integer) As Integer
-        Dim row As Integer = 0
-        Dim col As Integer = 0
+        Dim row As Integer
+        Dim col As Integer
         Dim aantal As Integer = 0
         For I As Integer = 0 To Markers.Length - 1
             If Markers(I).PlayerNr <> player Then Continue For
             row = GetRow(I)
             col = GetCol(I)
             If col > 2 Then
-                'Check LEFT
+                'Check LEFT 
                 If Markers(GetIndex(row, col - 1)).PlayerNr = player And Markers(GetIndex(row, col - 2)).PlayerNr = player And Markers(GetIndex(row, col - 3)).PlayerNr = player Then aantal += 1
                 If row > 2 Then
                     'Check LEFT UP
@@ -469,16 +484,15 @@ Class MainWindow
     ''' <param name="player">The player number (1 or 2)</param>
     ''' <returns>The number of times 3 in a row was found</returns>
     Private Function Check3(ByVal player As Integer) As Integer
-        Dim row As Integer = 0
-        Dim col As Integer = 0
+        Dim row As Integer
+        Dim col As Integer
         Dim aantal As Integer = 0
         For I As Integer = 0 To Markers.Length - 1
             If Markers(I).PlayerNr <> player Then Continue For
             row = GetRow(I)
             col = GetCol(I)
-
             If col > 2 Then
-                'Check LEFT
+                'Check LEFT 
                 If Markers(GetIndex(row, col - 1)).PlayerNr = player And Markers(GetIndex(row, col - 2)).PlayerNr = player And Markers(GetIndex(row, col - 3)).PlayerNr = 0 Then aantal += 1
                 If row > 2 Then
                     'Check LEFT UP
@@ -507,8 +521,8 @@ Class MainWindow
     ''' <param name="player">The player number (1 or 2)</param>
     ''' <returns>The number of times 2 in a row was found</returns>
     Private Function Check2(ByVal player As Integer) As Integer
-        Dim row As Integer = 0
-        Dim col As Integer = 0
+        Dim row As Integer
+        Dim col As Integer
         Dim aantal As Integer = 0
         For I As Integer = 0 To Markers.Length - 1
             If Markers(I).PlayerNr <> player Then Continue For
@@ -545,5 +559,19 @@ End Class
 Public Structure Move
     Public col As Integer
     Public score As Integer
+End Structure
+
+Public Enum GameMode
+    Easy = 2
+    Normal = 3
+    Hard = 5
+End Enum
+
+Public Structure Settings
+    Public PlayerCount As Integer
+    Public PlayerName1 As String
+    Public PlayerName2 As String
+    Public GameSize As Size
+    Public GameMode As GameMode
 End Structure
 
