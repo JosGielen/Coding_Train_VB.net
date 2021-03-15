@@ -1,1 +1,0 @@
-Click in the window to start the animation.
