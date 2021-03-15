@@ -1,1 +1,0 @@
-Drag the lower ball with the mouse to the desired position and let go.
